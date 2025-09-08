@@ -1,0 +1,22 @@
+{
+  "projectSettings": {
+    "framework": null,
+    "buildCommand": "bun run build",
+    "outputDirectory": ".vercel/output",
+    "rootDirectory": "apps/auth-proxy",
+    "installCommand": "bun install",
+    "devCommand": "bun run dev",
+    "ignoreCommand": "git diff --quiet HEAD^ HEAD apps/auth-proxy/ packages/auth/ packages/db/"
+  },
+  "functions": {
+    "routes/[...auth].ts": {
+      "runtime": "edge"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/routes/[...auth].ts"
+    }
+  ]
+}
