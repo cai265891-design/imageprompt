@@ -3,7 +3,9 @@
     "allow": [
       "Bash(tree:*)",
       "WebSearch",
-      "WebFetch(domain:vercel.com)"
+      "WebFetch(domain:vercel.com)",
+      "WebFetch(domain:community.vercel.com)",
+      "Bash(bun run build:*)"
     ],
     "deny": [],
     "ask": []

@@ -31,5 +31,8 @@
       "@saasfly/eslint-config/base"
     ]
   },
-  "prettier": "@saasfly/prettier-config"
+  "prettier": "@saasfly/prettier-config",
+  "engines": {
+    "node": "20.x"
+  }
 }
