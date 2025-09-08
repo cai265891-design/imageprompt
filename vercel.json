@@ -3,6 +3,5 @@
     "silent": true
   },
   "buildCommand": "bun run build",
-  "installCommand": "bun install",
-  "framework": "nextjs"
+  "installCommand": "bun install"
 }
