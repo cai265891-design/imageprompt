@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "clean": "rm -rf .turbo node_modules",
+    "build": "nitropack build",
+    "clean": "rm -rf .turbo node_modules .output",
+    "dev": "nitropack dev",
     "lint": "eslint",
     "format": "prettier --write '**/*.{js,cjs,mjs,ts,tsx,md,json}'  --ignore-path .prettierignore",
     "typecheck": "tsc --noEmit"

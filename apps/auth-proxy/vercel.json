@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "routes/[...auth].ts": {
+      "runtime": "edge"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/routes/[...auth].ts"
+    }
+  ]
+}
