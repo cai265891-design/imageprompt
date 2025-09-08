@@ -1,9 +1,11 @@
 {
+  "__comment": "此配置强制禁用 Next.js 框架检测",
+  "framework": null,
   "buildCommand": "./vercel-build.sh",
   "outputDirectory": ".vercel/output",
   "installCommand": "bun install",
   "devCommand": "bun run dev",
-  "framework": null,
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD apps/auth-proxy/",
   "functions": {
     "routes/[...auth].ts": {
       "runtime": "edge"

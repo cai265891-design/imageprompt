@@ -5,7 +5,9 @@
       "WebSearch",
       "WebFetch(domain:vercel.com)",
       "WebFetch(domain:community.vercel.com)",
-      "Bash(bun run build:*)"
+      "Bash(bun run build:*)",
+      "Bash(chmod:*)",
+      "Bash(./vercel-build.sh:*)"
     ],
     "deny": [],
     "ask": []

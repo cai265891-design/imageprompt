@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "nitropack build",
-    "clean": "rm -rf .turbo node_modules .output",
+    "build:vercel": "./vercel-build.sh",
+    "clean": "rm -rf .turbo node_modules .output .next",
     "dev": "nitropack dev",
     "lint": "eslint",
     "format": "prettier --write '**/*.{js,cjs,mjs,ts,tsx,md,json}'  --ignore-path .prettierignore",

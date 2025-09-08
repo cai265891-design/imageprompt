@@ -1,0 +1,16 @@
+{
+  "_vercel": {
+    "framework": "null",
+    "buildCommand": "./vercel-build.sh",
+    "outputDirectory": ".vercel/output",
+    "devCommand": "bun run dev",
+    "installCommand": "bun install"
+  },
+  "build": {
+    "env": {
+      "__COMMENT": "强制禁用 Next.js 检测",
+      "NEXT_TELEMETRY_DISABLED": "1",
+      "VERCEL_FRAMEWORK_DETECTION": "false"
+    }
+  }
+}
