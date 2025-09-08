@@ -4,6 +4,11 @@
   "installCommand": "bun install",
   "devCommand": "bun run dev",
   "framework": null,
+  "nodeVersion": "18.x",
+  "env": {
+    "NEXT_TELEMETRY_DISABLED": "1",
+    "VERCEL_FRAMEWORK_DETECTION": "false"
+  },
   "rewrites": [
     {
       "source": "/(.*)",

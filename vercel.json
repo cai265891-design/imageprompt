@@ -3,5 +3,11 @@
     "silent": true
   },
   "buildCommand": "bun run build",
-  "installCommand": "bun install"
+  "installCommand": "bun install",
+  "devCommand": "bun run dev",
+  "framework": "nextjs",
+  "nodeVersion": "18.x",
+  "env": {
+    "NEXT_TELEMETRY_DISABLED": "1"
+  }
 }

@@ -7,7 +7,10 @@
       "WebFetch(domain:community.vercel.com)",
       "Bash(bun run build:*)",
       "Bash(chmod:*)",
-      "Bash(./vercel-build.sh:*)"
+      "Bash(./vercel-build.sh:*)",
+      "Bash(cp:*)",
+      "Bash(bun install:*)",
+      "Bash(bun run with-env:*)"
     ],
     "deny": [],
     "ask": []
