@@ -4,11 +4,6 @@
   "installCommand": "bun install",
   "devCommand": "bun run dev",
   "framework": null,
-  "functions": {
-    "routes/[...auth].ts": {
-      "runtime": "edge"
-    }
-  },
   "rewrites": [
     {
       "source": "/(.*)",
