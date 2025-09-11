@@ -1,4 +1,4 @@
-import { middleware } from "./utils/clerk";
+import { middleware } from "./utils/nextauth-middleware";
 
 export const config = {
   matcher: [

@@ -10,7 +10,19 @@
       "Bash(./vercel-build.sh:*)",
       "Bash(cp:*)",
       "Bash(bun install:*)",
-      "Bash(bun run with-env:*)"
+      "Bash(bun run with-env:*)",
+      "Bash(bun run:*)",
+      "Bash(bun with-env:*)",
+      "Bash(curl:*)",
+      "Bash(bun remove:*)",
+      "Bash(pkill:*)",
+      "Bash(true)",
+      "WebFetch(domain:imageprompt.org)",
+      "Bash(turbo dev:*)",
+      "mcp__playwright__browser_navigate",
+      "Bash(lsof:*)",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_take_screenshot"
     ],
     "deny": [],
     "ask": []

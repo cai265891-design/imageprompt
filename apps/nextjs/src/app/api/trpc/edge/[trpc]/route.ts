@@ -1,15 +1,21 @@
 import type {NextRequest} from "next/server";
 import {fetchRequestHandler} from "@trpc/server/adapters/fetch";
+import {getToken} from "next-auth/jwt";
 
 import {createTRPCContext} from "@saasfly/api";
 import {edgeRouter} from "@saasfly/api/edge";
-import {getAuth} from "@clerk/nextjs/server";
 
 // export const runtime = "edge";
 const createContext = async (req: NextRequest) => {
+    const token = await getToken({ 
+        req: req as any,
+        secret: process.env.NEXTAUTH_SECRET 
+    });
+    
     return createTRPCContext({
         headers: req.headers,
-        auth: getAuth(req),
+        userId: token?.sub,
+        isAdmin: token?.isAdmin as boolean,
     });
 };
 

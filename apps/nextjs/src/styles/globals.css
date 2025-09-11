@@ -2,8 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import DM Sans font - matching imageprompt.org */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
 @layer base {
   :root {
+    /* imageprompt.org color scheme */
+    --colors-border: #e2e8f0;
+    --colors-input: #e2e8f0;
+    --colors-textarea: #e2e8f0;
+    --colors-ring: #6a66c4;
+    --colors-background: #fff;
+    --colors-graybackground: #f5f5f5;
+    --colors-foreground: #020817;
+    --colors-primary: #7f00ff;
+    --colors-primary-foreground: #fff;
+    --colors-secondary: #f1f5f9;
+    --colors-secondary-foreground: #0f172a;
+    --colors-destructive: #ef4444;
+    --colors-destructive-foreground: #fff;
+    --colors-success: #39a561;
+    --colors-success-foreground: #fff;
+    --colors-muted: #f8fafc;
+    --colors-muted-foreground: #64748b;
+    --colors-accent: #f1f5f9;
+    --colors-accent-foreground: #0f172a;
+    --colors-popover: #fff;
+    --colors-popover-foreground: #020817;
+    --colors-card: #fff;
+    --colors-card-foreground: #020817;
+    
+    /* RGB values for opacity utilities */
+    --colors-border-rgb: 226,232,240;
+    --colors-input-rgb: 226,232,240;
+    --colors-textarea-rgb: 226,232,240;
+    --colors-ring-rgb: 106,102,196;
+    --colors-background-rgb: 255,255,255;
+    --colors-graybackground-rgb: 245,245,245;
+    --colors-foreground-rgb: 2,8,23;
+    --colors-primary-rgb: 127,0,255;
+    --colors-primary-foreground-rgb: 255,255,255;
+    --colors-secondary-rgb: 241,245,249;
+    --colors-secondary-foreground-rgb: 15,23,42;
+    --colors-destructive-rgb: 239,68,68;
+    --colors-destructive-foreground-rgb: 255,255,255;
+    --colors-success-rgb: 57,165,97;
+    --colors-success-foreground-rgb: 255,255,255;
+    --colors-muted-rgb: 248,250,252;
+    --colors-muted-foreground-rgb: 100,116,139;
+    --colors-accent-rgb: 241,245,249;
+    --colors-accent-foreground-rgb: 15,23,42;
+    --colors-popover-rgb: 255,255,255;
+    --colors-popover-foreground-rgb: 2,8,23;
+    --colors-card-rgb: 255,255,255;
+    --colors-card-foreground-rgb: 2,8,23;
+
+    /* Original Tailwind CSS variables */
     --background: 0deg 0% 100%;
     --foreground: 222.2deg 47.4% 11.2%;
 
@@ -35,51 +89,95 @@
 
     --radius: 0.5rem;
   }
-
-  .dark {
-    --background: 240 10% 3.9%;
-    /* --background: 224 71% 4%; */
-    --foreground: 0 0% 98%;
-
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 0 0% 63.9%;
-
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-
-    --card: 224 71% 4%;
-    --card-foreground: 213 31% 91%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 1.2%;
-
-    --secondary: 222.2 47.4% 11.2%;
-    --secondary-foreground: 210 40% 98%;
-
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-
-    --ring: 216 34% 17%;
-
-    --radius: 0.5rem;
-  }
 }
 
 @layer base {
+  * {
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    -webkit-tap-highlight-color: transparent;
+    color-scheme: light;
+    box-sizing: border-box;
+    border: 0 solid #e5e7eb;
+  }
+
   body {
     @apply bg-background text-foreground;
-    font-feature-settings:
-      "rlig" 1,
-      "calt" 1;
+    min-height: 100vh;
+    background-color: var(--colors-background);
+    color: var(--colors-foreground);
+    -webkit-font-smoothing: antialiased;
+    padding: 0px;
+    margin: 0;
+    line-height: inherit;
+    font-family: 'DM Sans', var(--font-sans), sans-serif;
+  }
+
+  /* 强制使用浅色主题，禁用深色模式 */
+  html {
+    color-scheme: light !important;
+  }
+  
+  body {
+    color-scheme: light !important;
+  }
+  
+  /* 覆盖任何深色主题样式 */
+  .dark {
+    color-scheme: light !important;
+  }
+  
+  body.dark {
+    /* 即使是dark类也强制使用浅色主题颜色 */
+    background-color: var(--colors-background);
+    color: var(--colors-foreground);
   }
 
   .container {
     @apply max-sm:px-4;
+  }
+
+  /* 添加渐变背景支持 */
+  .bg-gradient-primary-transparent {
+    background-image: linear-gradient(to bottom, transparent, rgba(var(--colors-primary-rgb), 0.05));
+  }
+  
+  .bg-gradient-primary-light {
+    background-image: linear-gradient(to bottom, transparent, rgba(var(--colors-primary-rgb), 0.1));
+  }
+  
+  .bg-gradient-primary-medium {
+    background-image: linear-gradient(to bottom, transparent, rgba(var(--colors-primary-rgb), 0.15));
+  }
+
+  /* 确保所有主要元素使用我们的颜色变量 */
+  .bg-background {
+    background-color: var(--colors-background) !important;
+  }
+  
+  .text-foreground {
+    color: var(--colors-foreground) !important;
+  }
+  
+  .bg-primary {
+    background-color: var(--colors-primary) !important;
+  }
+  
+  .text-primary-foreground {
+    color: var(--colors-primary-foreground) !important;
+  }
+  
+  .bg-muted {
+    background-color: var(--colors-muted) !important;
+  }
+  
+  .text-muted-foreground {
+    color: var(--colors-muted-foreground) !important;
+  }
+  
+  .border-border {
+    border-color: var(--colors-border) !important;
   }
 }

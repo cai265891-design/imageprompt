@@ -32,6 +32,10 @@ export const getMarketingConfig = async ({
         title: dict.marketing.main_nav_documentation,
         href: `/docs`,
       },
+      {
+        title: "AI图像生成",
+        href: `/image-prompt`,
+      },
     ],
   };
 };

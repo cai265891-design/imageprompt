@@ -2,6 +2,7 @@ import "server-only";
 
 import { cookies } from "next/headers";
 import { createTRPCProxyClient, loggerLink, TRPCClientError } from "@trpc/client";
+import { getToken } from "next-auth/jwt";
 
 import { AppRouter } from "@saasfly/api";
 
@@ -11,17 +12,16 @@ import { callProcedure } from "@trpc/server";
 import { TRPCErrorResponse } from "@trpc/server/rpc";
 import { cache } from "react";
 import { appRouter } from "../../../../packages/api/src/root";
-import { auth } from "@clerk/nextjs/server";
-
-type AuthObject = Awaited<ReturnType<typeof auth>>;
 
 export const createTRPCContext = async (opts: {
   headers: Headers;
-  auth: AuthObject;
+  userId?: string;
+  isAdmin?: boolean;
 // eslint-disable-next-line @typescript-eslint/require-await
 }) => {
   return {
-    userId: opts.auth.userId,
+    userId: opts.userId,
+    isAdmin: opts.isAdmin,
     ...opts,
   };
 };
@@ -32,12 +32,18 @@ export const createTRPCContext = async (opts: {
  * handling a tRPC call from a React Server Component.
  */
 const createContext = cache(async () => {
+  const token = await getToken({ 
+    req: { headers: { cookie: cookies().toString() } } as any,
+    secret: process.env.NEXTAUTH_SECRET 
+  });
+  
   return createTRPCContext({
     headers: new Headers({
       cookie: cookies().toString(),
       "x-trpc-source": "rsc",
     }),
-    auth: await auth(),
+    userId: token?.sub,
+    isAdmin: token?.isAdmin as boolean,
   });
 });
 
