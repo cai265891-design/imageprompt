@@ -1,45 +1,28 @@
 import type { Locale } from "~/config/i18n-config";
-import { getDictionary } from "~/lib/get-dictionary";
 import type { MarketingConfig } from "~/types";
 
 export const getMarketingConfig = async ({
-  params: { lang },
+  params: {},
 }: {
   params: {
     lang: Locale;
   };
 }): Promise<MarketingConfig> => {
-  const dict = await getDictionary(lang);
+  // ImagePrompt专用导航配置
   return {
     mainNav: [
       {
-        title: "Libra AI",
-        href: "https://libra.dev/",
+        title: "Home",
+        href: "/",
       },
       {
-        title: dict.marketing.main_nav_features,
-        href: `/#features`,
-      },
-      {
-        title: dict.marketing.main_nav_pricing,
-        href: `/pricing`,
-      },
-      {
-        title: dict.marketing.main_nav_blog,
-        href: `/blog`,
-      },
-      {
-        title: dict.marketing.main_nav_documentation,
-        href: `/docs`,
-      },
-      {
-        title: "AI图像生成",
-        href: `/image-prompt`,
-      },
-      {
-        title: dict.marketing.main_nav_image_to_prompt,
-        href: `/image-to-prompt`,
+        title: "ImagePrompt.org",
+        href: "/image-prompt",
+        isBrand: true, // 特殊标记这是品牌链接
       },
     ],
+    showGitHubStar: false,
+    showLocaleChange: true,
+    loginStyle: "imageprompt", // 使用imageprompt的login样式
   };
 };

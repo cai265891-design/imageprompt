@@ -6,6 +6,7 @@ export interface NavItem {
   title: string;
   href: string;
   disabled?: boolean;
+  isBrand?: boolean; // 新增：标记是否为品牌链接
 }
 
 export type MainNavItem = NavItem;
@@ -49,6 +50,9 @@ export interface DocsConfig {
 
 export interface MarketingConfig {
   mainNav: MainNavItem[];
+  showGitHubStar?: boolean;
+  showLocaleChange?: boolean;
+  loginStyle?: "default" | "imageprompt";
 }
 
 export interface DashboardConfig {

@@ -2,6 +2,7 @@ import { Suspense } from "react";
 
 import { getCurrentUser } from "@saasfly/auth";
 
+import { DevToolsProvider } from "~/components/dev-tools-provider";
 import { ModalProvider } from "~/components/modal-provider";
 import { NavBar } from "~/components/navbar";
 import { SiteFooter } from "~/components/site-footer";
@@ -20,27 +21,34 @@ export default async function MarketingLayout({
 }) {
   const dict = await getDictionary(lang);
   const user = await getCurrentUser();
+  const marketingConfig = await getMarketingConfig({ params: { lang: `${lang}` } });
+  
   return (
-    <div className="flex min-h-screen flex-col">
-      <Suspense fallback="...">
-        <NavBar
-          items={
-            (await getMarketingConfig({ params: { lang: `${lang}` } })).mainNav
-          }
+    <DevToolsProvider>
+      <div className="flex min-h-screen flex-col">
+        <Suspense fallback="...">
+          <NavBar
+            items={marketingConfig.mainNav}
+            params={{ lang: `${lang}` }}
+            scroll={true}
+            user={user}
+            marketing={dict.marketing}
+            dropdown={dict.dropdown}
+            config={{
+              showGitHubStar: marketingConfig.showGitHubStar,
+              showLocaleChange: marketingConfig.showLocaleChange,
+              loginStyle: marketingConfig.loginStyle,
+            }}
+          />
+        </Suspense>
+        <ModalProvider dict={dict.login} />
+        <main className="flex-1">{children}</main>
+        <SiteFooter
+          className="border-t border-border"
           params={{ lang: `${lang}` }}
-          scroll={true}
-          user={user}
-          marketing={dict.marketing}
-          dropdown={dict.dropdown}
+          dict={dict.common}
         />
-      </Suspense>
-      <ModalProvider dict={dict.login} />
-      <main className="flex-1">{children}</main>
-      <SiteFooter
-        className="border-t border-border"
-        params={{ lang: `${lang}` }}
-        dict={dict.common}
-      />
-    </div>
+      </div>
+    </DevToolsProvider>
   );
 }

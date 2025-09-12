@@ -38,6 +38,7 @@ Saasfly is an enterprise-grade Next.js SaaS boilerplate built with a modern tech
 - `apps/auth-proxy/` - Authentication proxy service
 - `packages/api/` - tRPC API definitions and routers
 - `packages/auth/` - Authentication utilities (Clerk + NextAuth support)
+
 - `packages/db/` - Database schema (Prisma) and Kysely query builder
 - `packages/ui/` - Shared UI components (shadcn/ui based)
 - `packages/stripe/` - Stripe integration and webhooks

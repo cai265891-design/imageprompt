@@ -28,6 +28,11 @@ interface NavBarProps {
   };
   marketing: Record<string, string | object>;
   dropdown: Record<string, string>;
+  config?: {
+    showGitHubStar?: boolean;
+    showLocaleChange?: boolean;
+    loginStyle?: "default" | "imageprompt";
+  };
 }
 
 export function NavBar({
@@ -39,6 +44,7 @@ export function NavBar({
   params: { lang },
   marketing,
   dropdown,
+  config,
 }: NavBarProps) {
   const scrolled = useScroll(50);
   const signInModal = useSigninModal();
@@ -58,40 +64,76 @@ export function NavBar({
         <div className="flex items-center space-x-3">
           {items?.length ? (
             <nav className="hidden gap-6 md:flex">
-              {items?.map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.disabled ? "#" : (item.href.startsWith("http") ? item.href : `/${lang}${item.href}`)}
-                  className={cn(
-                    "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                    item.href.startsWith(`/${segment}`)
-                      ? "text-blue-500 font-semibold"
-                      : "",
-                    item.disabled && "cursor-not-allowed opacity-80",
-                  )}
-                >
-                  {item.title}
-                </Link>
-              ))}
+              {items?.map((item, index) => {
+                // 特殊处理品牌链接
+                if (item.isBrand) {
+                  return (
+                    <Link
+                      key={index}
+                      href={item.disabled ? "#" : (item.href.startsWith("http") ? item.href : `/${lang}${item.href}`)}
+                      className={cn(
+                        "flex items-center text-lg font-bold transition-colors",
+                        "text-purple-600 hover:text-purple-700",
+                        "flex items-center gap-2",
+                        item.disabled && "cursor-not-allowed opacity-80",
+                      )}
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+                        <rect x="2.5" y="3.5" width="19" height="17" rx="3.5" stroke="none" fill="rgba(127,0,255,0.12)" />
+                        <path d="M7 14l3.5-4.5L13 14l3-4" stroke="none" fill="currentColor" opacity="0.95" />
+                      </svg>
+                      {item.title}
+                    </Link>
+                  );
+                }
+                
+                return (
+                  <Link
+                    key={index}
+                    href={item.disabled ? "#" : (item.href.startsWith("http") ? item.href : `/${lang}${item.href}`)}
+                    className={cn(
+                      "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
+                      item.href.startsWith(`/${segment}`)
+                        ? "text-blue-500 font-semibold"
+                        : "",
+                      item.disabled && "cursor-not-allowed opacity-80",
+                    )}
+                  >
+                    {item.title}
+                  </Link>
+                );
+              })}
             </nav>
           ) : null}
 
-          <div className="w-[1px] h-8 bg-accent"></div>
-
           {rightElements}
 
-          <div className="hidden md:flex lg:flex xl:flex">
-            <GitHubStar />
-          </div>
-          <LocaleChange url={"/"} />
+          {config?.showGitHubStar !== false && (
+            <div className="hidden md:flex lg:flex xl:flex">
+              <GitHubStar />
+            </div>
+          )}
+          
+          {config?.showLocaleChange !== false && (
+            <LocaleChange url={"/"} />
+          )}
+          
           {!user ? (
-            <Link href={`/${lang}/login`}>
-              <Button variant="outline" size="sm">
-                {typeof marketing.login === "string"
-                  ? marketing.login
-                  : "Default Login Text"}
-              </Button>
-            </Link>
+            config?.loginStyle === "imageprompt" ? (
+              <Link href={`/${lang}/login`}>
+                <span className="text-sm font-bold" style={{ color: 'var(--purple-1)' }}>
+                  Login
+                </span>
+              </Link>
+            ) : (
+              <Link href={`/${lang}/login`}>
+                <Button variant="outline" size="sm">
+                  {typeof marketing.login === "string"
+                    ? marketing.login
+                    : "Default Login Text"}
+                </Button>
+              </Link>
+            )
           ) : null}
 
           {user ? (

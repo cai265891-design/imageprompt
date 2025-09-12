@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 
 import * as Icons from "@saasfly/ui/icons";
-import { DocumentGuide } from "~/components/document-guide";
+import { DevTools } from "@saasfly/ui";
 import { MobileNav } from "~/components/mobile-nav";
 
 import type { MainNavItem } from "~/types";
@@ -30,13 +30,15 @@ export function MainNav({ items, children, params: { lang }, marketing }: MainNa
     <div className="flex gap-6 md:gap-10">
       <div className="flex items-center">
         <Link href={`/${lang}`} className="hidden items-center space-x-2 md:flex">
-          <div className="text-3xl">Saasfly</div>
         </Link>
 
-        <Link href="https://docs.saasfly.io" target="_blank" className="ml-4 hidden md:flex lg:flex xl:flex">
-          <DocumentGuide>
-            {typeof marketing?.introducing === "string" ? marketing?.introducing : "Introducing Saasfly"}
-          </DocumentGuide>
+        <Link href="/ai-image-generator" className="ml-4 hidden md:flex lg:flex xl:flex">
+          <DevTools filePath="apps/nextjs/src/components/main-nav.tsx" lineNumber={35}>
+            <div className="flex items-center space-x-2 text-lg font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent hover:from-purple-700 hover:to-pink-700 transition-all duration-200">
+              <span>🎨</span>
+              <span>ImagePrompt</span>
+            </div>
+          </DevTools>
         </Link>
       </div>
 

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
+import { DevTools } from "@saasfly/ui";
 import type { Locale } from "~/config/i18n-config";
 
 export default function ImagePromptPage() {
@@ -12,7 +13,7 @@ export default function ImagePromptPage() {
   // 为简单起见，暂时使用硬编码的文本
   
   return (
-    <>
+    <DevTools filePath="apps/nextjs/src/app/[lang]/(marketing)/image-prompt/page.tsx" lineNumber={15}>
       <style jsx global>{`
         :root {
           --bg: #fff;
@@ -178,7 +179,7 @@ export default function ImagePromptPage() {
           display: flex;
           flex-direction: column;
           gap: 8px;
-          border: 1px solid rgba(15,23,42,0.03);
+          border: 1px solid rgba(0, 0, 1, 0.03);
         }
         
         .card .icon {
@@ -224,32 +225,6 @@ export default function ImagePromptPage() {
           }
         }
       `}</style>
-
-      {/* 导航条 - Replicated from example.html */}
-      <header className="site-header" role="banner">
-        <div className="brand">
-          {/* simple logo svg similar to site */}
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="2.5" y="3.5" width="19" height="17" rx="3.5" stroke="none" fill="rgba(127,0,255,0.12)"></rect>
-            <path d="M7 14l3.5-4.5L13 14l3-4" stroke="none" fill="var(--purple-1)" opacity="0.95"></path>
-          </svg>
-          ImagePrompt.org
-        </div>
-
-        <nav className="main-nav" role="navigation" aria-label="Main">
-          <Link href="/" className="active">Home</Link>
-          <Link href="/inspiration">Inspiration</Link>
-          <Link href="/tutorials">Tutorials</Link>
-          <Link href="/tools">Tools ▾</Link>
-          <Link href="/pricing">Pricing</Link>
-        </nav>
-
-        <div className="nav-right" aria-hidden="true">
-          {/* small icons */}
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{opacity: 0.9}}><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.2" /></svg>
-          <Link href="/auth/login" style={{fontSize: '14px', color: 'var(--purple-1)', fontWeight: '700'}}>Login</Link>
-        </div>
-      </header>
 
       {/* Hero 区 - Replicated from example.html */}
       <section className="hero" role="region" aria-label="Hero">
@@ -335,9 +310,7 @@ export default function ImagePromptPage() {
                 <div style={{flex: 1}}>
                   <h4>Image to Prompt</h4>
                   <p>Transform your image into detailed image prompt with Image to Prompt, enhancing your creative process and optimizing AI-driven design efficiency.</p>
-                  <Link href="/image-to-prompt" className="btn btn-primary" style={{marginTop: '12px', fontSize: '13px', padding: '8px 14px'}}>
-                    Generate Prompt
-                  </Link>
+              
                 </div>
               </div>
             </div>
@@ -350,9 +323,7 @@ export default function ImagePromptPage() {
                 <div style={{flex: 1}}>
                   <h4>Image Prompt Generator</h4>
                   <p>Enhance your AI image generation with our Image Prompt Generator. Turn your idea into detailed, AI-optimized prompts, whether you're fluent in English or not.</p>
-                  <Link href="/image-prompt-generator" className="btn btn-primary" style={{marginTop: '12px', fontSize: '13px', padding: '8px 14px'}}>
-                    Generate Prompt
-                  </Link>
+                 
                 </div>
               </div>
             </div>
@@ -365,9 +336,7 @@ export default function ImagePromptPage() {
                 <div style={{flex: 1}}>
                   <h4>AI Image Generator</h4>
                   <p>Use Image Prompt to effortlessly generate stunning images, enhancing creativity and streamlining your design process with AI-powered precision.</p>
-                  <Link href="/ai-image-generator" className="btn btn-primary" style={{marginTop: '12px', fontSize: '13px', padding: '8px 14px'}}>
-                    Generate Image Now!
-                  </Link>
+                 
                 </div>
               </div>
             </div>
@@ -380,9 +349,7 @@ export default function ImagePromptPage() {
                 <div style={{flex: 1}}>
                   <h4>AI Describe Image</h4>
                   <p>Let AI help you understand any image - get detailed descriptions, recognize objects, or ask your own questions</p>
-                  <Link href="/describe-image" className="btn btn-primary" style={{marginTop: '12px', fontSize: '13px', padding: '8px 14px'}}>
-                    Generate Description
-                  </Link>
+                
                 </div>
               </div>
             </div>
@@ -477,6 +444,6 @@ export default function ImagePromptPage() {
           <p className="text-center text-[14px] text-[#718096]">© 2025 EchoFlow, LLC. All rights reserved.</p>
         </div>
       </footer>
-    </>
+    </DevTools>
   );
 }
