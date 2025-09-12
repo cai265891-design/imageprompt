@@ -1,19 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { getDictionary } from "~/lib/get-dictionary";
-import { Button } from "@saasfly/ui/button";
+import { useParams } from "next/navigation";
 
 import type { Locale } from "~/config/i18n-config";
 
-export default function ImagePromptPage({
-  params: { lang },
-}: {
-  params: {
-    lang: Locale;
-  };
-}) {
+export default function ImagePromptPage() {
+  const params = useParams();
+  const lang = params?.lang as Locale;
   // 客户端组件不能使用async，我们使用useEffect来获取字典
   // 为简单起见，暂时使用硬编码的文本
   
@@ -168,15 +162,14 @@ export default function ImagePromptPage({
         
         /* Card styles from example.html */
         .cards-row {
-          display: flex;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
           gap: 18px;
-          justify-content: center;
           margin-top: 18px;
-          flex-wrap: wrap;
+          padding: 10px 0;
         }
         
         .card {
-          width: 240px;
           background: var(--card-bg);
           border-radius: 12px;
           padding: 18px;
@@ -195,10 +188,10 @@ export default function ImagePromptPage({
           display: flex;
           align-items: center;
           justify-content: center;
-          background: linear-gradient(180deg, var(--purple-1), var(--purple-2));
-          color: #fff;
+          background: transparent;
+          color: var(--purple-1);
           font-weight: 700;
-          box-shadow: 0 8px 18px rgba(127,0,255,0.12);
+          border: 2px solid rgba(127,0,255,0.12);
         }
         
         .card h4 {
@@ -225,8 +218,10 @@ export default function ImagePromptPage({
           .site-header { padding: 14px; }
           .main-nav { display: none; }
           .hero-title { font-size: 34px; }
-          .cards-row { justify-content: center; gap: 12px; }
-          .card { width: 90%; max-width: 420px; }
+          .cards-row { 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 12px; 
+          }
         }
       `}</style>
 
@@ -271,8 +266,12 @@ export default function ImagePromptPage({
             <div className="card" role="article" aria-label="Image to Prompt">
               <div style={{display: 'flex', gap: '12px', alignItems: 'flex-start'}}>
                 <div className="icon" aria-hidden="true">
-                  {/* small image icon */}
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7a2 2 0 0 1 2-2h12" fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  {/* Image to Prompt 图标 - 上传/转换 */}
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" strokeWidth="2" fill="none"/>
+                    <polyline points="7,10 12,15 17,10" stroke="currentColor" strokeWidth="2" fill="none"/>
+                    <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" strokeWidth="2"/>
+                  </svg>
                 </div>
                 <div style={{flex: 1}}>
                   <h4>Image to Prompt</h4>
@@ -284,7 +283,10 @@ export default function ImagePromptPage({
             <div className="card" role="article" aria-label="Magic Enhance">
               <div style={{display: 'flex', gap: '12px', alignItems: 'flex-start'}}>
                 <div className="icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v18" stroke="#fff" strokeWidth="1.6" strokeLinecap="round"/></svg>
+                  {/* Magic Enhance 图标 - 魔法星星 */}
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L9 8l-6 1 4 4-1 6 6-3 6 3-1-6 4-4-6-1z" stroke="currentColor" strokeWidth="2" fill="rgba(127,0,255,0.1)"/>
+                  </svg>
                 </div>
                 <div style={{flex: 1}}>
                   <h4>Magic Enhance</h4>
@@ -296,7 +298,12 @@ export default function ImagePromptPage({
             <div className="card" role="article" aria-label="AI Describe Image">
               <div style={{display: 'flex', gap: '12px', alignItems: 'flex-start'}}>
                 <div className="icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#fff" strokeWidth="1.6"/></svg>
+                  {/* AI Describe Image 图标 - 眼睛/观察 */}
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
+                    <path d="M12 1v4m0 14v4m11-7h-4m-14 0H1" stroke="currentColor" strokeWidth="2"/>
+                    <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.3"/>
+                  </svg>
                 </div>
                 <div style={{flex: 1}}>
                   <h4>AI Describe Image</h4>
@@ -305,18 +312,7 @@ export default function ImagePromptPage({
               </div>
             </div>
 
-            <div className="card" role="article" aria-label="AI Image Generator">
-              <div style={{display: 'flex', gap: '12px', alignItems: 'flex-start'}}>
-                <div className="icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7h16v10H4z" stroke="#fff" strokeWidth="1.6" /></svg>
-                </div>
-                <div style={{flex: 1}}>
-                  <h4>AI Image Generator</h4>
-                  <p>Transform your image prompt into stunning visuals with AI-powered generation</p>
-                </div>
-              </div>
-            </div>
-
+           
           </div>
 
         </div>
@@ -334,7 +330,7 @@ export default function ImagePromptPage({
             <div className="card" role="article">
               <div style={{display: 'flex', gap: '12px', alignItems: 'flex-start'}}>
                 <div className="icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7a2 2 0 0 1 2-2h12" fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7a2 2 0 0 1 2-2h12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </div>
                 <div style={{flex: 1}}>
                   <h4>Image to Prompt</h4>
@@ -349,7 +345,7 @@ export default function ImagePromptPage({
             <div className="card" role="article">
               <div style={{display: 'flex', gap: '12px', alignItems: 'flex-start'}}>
                 <div className="icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v18" stroke="#fff" strokeWidth="1.6" strokeLinecap="round"/></svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>
                 </div>
                 <div style={{flex: 1}}>
                   <h4>Image Prompt Generator</h4>
@@ -364,7 +360,7 @@ export default function ImagePromptPage({
             <div className="card" role="article">
               <div style={{display: 'flex', gap: '12px', alignItems: 'flex-start'}}>
                 <div className="icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </div>
                 <div style={{flex: 1}}>
                   <h4>AI Image Generator</h4>
@@ -379,7 +375,7 @@ export default function ImagePromptPage({
             <div className="card" role="article">
               <div style={{display: 'flex', gap: '12px', alignItems: 'flex-start'}}>
                 <div className="icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#fff" strokeWidth="1.6"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke="#fff" strokeWidth="1.6"/></svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke="currentColor" strokeWidth="1.6"/></svg>
                 </div>
                 <div style={{flex: 1}}>
                   <h4>AI Describe Image</h4>
