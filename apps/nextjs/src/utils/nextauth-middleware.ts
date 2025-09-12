@@ -22,6 +22,7 @@ export const isPublicRoute = (request: NextRequest): boolean => {
     new RegExp("/(\\w{2}/)?blog(.*)"),
     new RegExp("/(\\w{2}/)?pricing(.*)"),
     new RegExp("/(\\w{2}/)?image-prompt(.*)"),
+    new RegExp("/(\\w{2}/)?image-to-prompt(.*)"),
     new RegExp("^/\\w{2}$"), // root with locale
   ];
   
