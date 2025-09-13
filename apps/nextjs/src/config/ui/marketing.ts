@@ -16,13 +16,12 @@ export const getMarketingConfig = async ({
         href: "/",
       },
       {
-        title: "ImagePrompt.org",
-        href: "/image-prompt",
-        isBrand: true, // 特殊标记这是品牌链接
+        title: "Tools",
+        href: "/image-to-prompt",
       },
     ],
     showGitHubStar: false,
-    showLocaleChange: true,
+    showLocaleChange: false, // 隐藏多语言切换
     loginStyle: "imageprompt", // 使用imageprompt的login样式
   };
 };

@@ -10,5 +10,5 @@ export default function Page({
 }: {
   params: { lang: Locale };
 }) {
-  return <ImageToPromptPage lang={params.lang} />;
+  return <ImageToPromptPage />;
 }

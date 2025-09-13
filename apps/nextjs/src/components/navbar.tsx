@@ -57,45 +57,24 @@ export function NavBar({
       }`}
     >
       <div className="container flex h-16 items-center justify-between py-4">
-        <MainNav items={items} params={{ lang: `${lang}` }} marketing={marketing}>
-          {children}
-        </MainNav>
-
-        <div className="flex items-center space-x-3">
+        {/* 左侧区域 - Home 和 Tools 导航，与 H1 对齐 */}
+        <div className="flex items-center gap-8">
+          <MainNav items={items} params={{ lang: `${lang}` }} marketing={marketing}>
+            {children}
+          </MainNav>
+          
           {items?.length ? (
             <nav className="hidden gap-6 md:flex">
               {items?.map((item, index) => {
-                // 特殊处理品牌链接
-                if (item.isBrand) {
-                  return (
-                    <Link
-                      key={index}
-                      href={item.disabled ? "#" : (item.href.startsWith("http") ? item.href : `/${lang}${item.href}`)}
-                      className={cn(
-                        "flex items-center text-lg font-bold transition-colors",
-                        "text-purple-600 hover:text-purple-700",
-                        "flex items-center gap-2",
-                        item.disabled && "cursor-not-allowed opacity-80",
-                      )}
-                    >
-                      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
-                        <rect x="2.5" y="3.5" width="19" height="17" rx="3.5" stroke="none" fill="rgba(127,0,255,0.12)" />
-                        <path d="M7 14l3.5-4.5L13 14l3-4" stroke="none" fill="currentColor" opacity="0.95" />
-                      </svg>
-                      {item.title}
-                    </Link>
-                  );
-                }
-                
                 return (
                   <Link
                     key={index}
                     href={item.disabled ? "#" : (item.href.startsWith("http") ? item.href : `/${lang}${item.href}`)}
                     className={cn(
-                      "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
+                      "text-sm font-medium transition-colors hover:text-foreground/80",
                       item.href.startsWith(`/${segment}`)
                         ? "text-blue-500 font-semibold"
-                        : "",
+                        : "text-gray-600 hover:text-gray-900",
                       item.disabled && "cursor-not-allowed opacity-80",
                     )}
                   >
@@ -105,7 +84,10 @@ export function NavBar({
               })}
             </nav>
           ) : null}
-
+        </div>
+        
+        {/* 右侧区域 - 用户操作 */}
+        <div className="flex items-center space-x-3">
           {rightElements}
 
           {config?.showGitHubStar !== false && (

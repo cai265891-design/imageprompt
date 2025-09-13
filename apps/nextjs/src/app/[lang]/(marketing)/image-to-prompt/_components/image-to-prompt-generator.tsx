@@ -6,6 +6,8 @@ import { Button } from "@saasfly/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@saasfly/ui/select";
 import { Loader2, Copy, Check } from "lucide-react";
 import Image from "next/image";
+import { cozeAPI } from "../../../../../lib/coze-api";
+import { cozeConfig } from "../../../../../config/coze";
 
 interface UploadedImage {
   file: File;
@@ -21,7 +23,7 @@ interface AIModel {
 const aiModels: AIModel[] = [
   {
     id: "general",
-    name: "General Image Prompt",
+    name: "Image Prompt",
     description: "Natural language description of the image"
   },
   {
@@ -113,12 +115,39 @@ export function ImageToPromptGenerator() {
     if (!uploadedImage) return;
     
     setIsGenerating(true);
+    setGeneratedPrompt("");
     
-    // 模拟API调用
-    setTimeout(() => {
-      setGeneratedPrompt(`A beautiful landscape photo featuring mountains, lakes, and sky. The composition is balanced with rich colors and natural lighting. Suitable for generating similar images using the ${aiModels.find(m => m.id === selectedModel)?.name} model.`);
+    try {
+      // Map the selected model to the Coze workflow parameter
+      const cozeModel = cozeConfig.modelMapping[selectedModel] || 'normal';
+      
+      // Call Coze API to generate prompt
+      const prompt = await cozeAPI.generateImagePrompt(
+        uploadedImage.file,
+        cozeModel,
+        selectedLanguage
+      );
+      
+      setGeneratedPrompt(prompt);
+    } catch (error) {
+      console.error('Failed to generate prompt:', error);
+      
+      let errorMessage = '生成提示词失败，请重试。';
+      if (error instanceof Error) {
+        if (error.message.includes('工作流未找到')) {
+          errorMessage = error.message;
+        } else if (error.message.includes('机器人未找到')) {
+          errorMessage = error.message;
+        } else {
+          errorMessage = '错误: ' + error.message;
+        }
+      }
+      
+      alert(errorMessage);
+      setGeneratedPrompt('');
+    } finally {
       setIsGenerating(false);
-    }, 2000);
+    }
   };
 
   const copyToClipboard = async () => {
@@ -177,6 +206,8 @@ export function ImageToPromptGenerator() {
           onDragLeave={handleDrag}
           onDragOver={handleDrag}
           onDrop={handleDrop}
+          onClick={() => !uploadedImage && fileInputRef.current?.click()}
+          style={{ cursor: uploadedImage ? 'default' : 'pointer' }}
         >
           {uploadedImage ? (
             <div className="space-y-4 w-full">
@@ -195,7 +226,10 @@ export function ImageToPromptGenerator() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => fileInputRef.current?.click()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    fileInputRef.current?.click();
+                  }}
                 >
                   更换图片
                 </Button>

@@ -1,0 +1,317 @@
+$ bun with-env next dev -p 3000
+$ dotenv -e ../../.env.local -- next dev -p "3000"
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+   automatically enabled Fast Refresh for 1 custom loader
+ ✓ Ready in 2.1s
+ ✓ Compiled /src/middleware in 257ms (240 modules)
+ ○ Compiling /[lang]/image-to-prompt ...
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+(node:22552) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/caihongjia/saasfly/tooling/tailwind-config/index.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/caihongjia/saasfly/tooling/tailwind-config/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ Compiled /[lang]/image-to-prompt in 7.7s (6106 modules)
+ ✓ Compiled in 879ms (1990 modules)
+ GET /en/image-to-prompt 200 in 9458ms
+ GET /en/image-to-prompt 200 in 45ms
+ ○ Compiling /[lang]/login ...
+ ✓ Compiled /[lang]/login in 3.1s (6094 modules)
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 2668ms
+ GET /zh/login?from=%2Fzh%2F__next_devtools__%2Fclient 200 in 2609ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 75ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 136ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 160ms
+ GET /zh/login?from=%2Fzh%2F__next_devtools__%2Fclient 200 in 158ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 165ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 142ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 96ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 76ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 66ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 66ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 67ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 60ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 92ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 118ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 74ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 63ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 166ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 166ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 77ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 77ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 83ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 77ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 54ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 49ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 93ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 94ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 44ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 41ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 55ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 52ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 56ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 60ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 54ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 42ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 43ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 41ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 47ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 47ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 38ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 42ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 30ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 30ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 32ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 32ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 33ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 34ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 30ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 31ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 32ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 33ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 34ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 33ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 43ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 41ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 28ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 27ms
+ ✓ Compiled in 1575ms (6108 modules)
+ GET /en/image-to-prompt?_rsc=1ce18 200 in 645ms
+ ✓ Compiled in 1080ms (6108 modules)
+ GET /en/image-to-prompt?_rsc=1ce18 200 in 315ms
+ ✓ Compiled in 1015ms (6108 modules)
+ GET /en/image-to-prompt?_rsc=1ce18 200 in 240ms
+ ⨯ ./src/lib/coze-api.ts
+Error: 
+  [31mx[0m cannot reassign to a variable declared with `const`
+     ,-[[36;1;4m/Users/caihongjia/saasfly/apps/nextjs/src/lib/coze-api.ts[0m:399:1]
+ [2m399[0m |     return userQueryMap[language as keyof typeof userQueryMap] || userQueryMap['en'];
+ [2m400[0m |   }
+ [2m401[0m | 
+ [2m402[0m |   private async tryWorkflowWithParams(parameters: any, model: string, language: string): Promise<string> {
+     : [31;1m                                      ^^^^^^^|^^^^^^^[0m
+     :                                              [31;1m`-- [31;1mcannot reassign[0m[0m
+ [2m403[0m |     const params = {
+ [2m404[0m |       workflow_id: cozeConfig.workflowId,
+ [2m405[0m |       app_id: cozeConfig.appId,
+ [2m406[0m |       parameters: JSON.stringify(parameters)
+ [2m407[0m |     };
+ [2m408[0m |     // Map language to userQuery based on curl example
+ [2m409[0m |     const userQueryMap = {
+ [2m410[0m |       'en': 'Please describe this image',
+ [2m411[0m |       'zh': '请描述一下这张图片',
+ [2m412[0m |       'ja': 'この画像を説明してください',
+ [2m413[0m |       'ko': '이 이미지를 설명해 주세요',
+ [2m414[0m |       'es': 'Por favor describe esta imagen',
+ [2m415[0m |       'fr': 'Veuillez décrire cette image',
+ [2m416[0m |       'de': 'Bitte beschreibe dieses Bild'
+ [2m417[0m |     };
+ [2m418[0m |     
+ [2m419[0m |     const userQuery = userQueryMap[language as keyof typeof userQueryMap] || userQueryMap['en'];
+ [2m420[0m |     
+ [2m421[0m |     // Try different parameter formats to find the correct one
+ [2m422[0m |     const parameters = {
+     : [33;1m          ^^^^^|^^^^[0m
+     :                [33;1m`-- [33;1mconst variable was declared here[0m[0m
+ [2m423[0m |       // Format 1: Direct file_id (most likely for Coze internal files)
+ [2m424[0m |       file_id: fileId,
+ [2m425[0m |       promptType: model,
+     `----
+
+  [31mx[0m the name `parameters` is defined multiple times
+     ,-[[36;1;4m/Users/caihongjia/saasfly/apps/nextjs/src/lib/coze-api.ts[0m:399:1]
+ [2m399[0m |     return userQueryMap[language as keyof typeof userQueryMap] || userQueryMap['en'];
+ [2m400[0m |   }
+ [2m401[0m | 
+ [2m402[0m |   private async tryWorkflowWithParams(parameters: any, model: string, language: string): Promise<string> {
+     : [31;1m                                      ^^^^^^^|^^^^^^^[0m
+     :                                              [31;1m`-- [31;1mprevious definition of `parameters` here[0m[0m
+ [2m403[0m |     const params = {
+ [2m404[0m |       workflow_id: cozeConfig.workflowId,
+ [2m405[0m |       app_id: cozeConfig.appId,
+ [2m406[0m |       parameters: JSON.stringify(parameters)
+ [2m407[0m |     };
+ [2m408[0m |     // Map language to userQuery based on curl example
+ [2m409[0m |     const userQueryMap = {
+ [2m410[0m |       'en': 'Please describe this image',
+ [2m411[0m |       'zh': '请描述一下这张图片',
+ [2m412[0m |       'ja': 'この画像を説明してください',
+ [2m413[0m |       'ko': '이 이미지를 설명해 주세요',
+ [2m414[0m |       'es': 'Por favor describe esta imagen',
+ [2m415[0m |       'fr': 'Veuillez décrire cette image',
+ [2m416[0m |       'de': 'Bitte beschreibe dieses Bild'
+ [2m417[0m |     };
+ [2m418[0m |     
+ [2m419[0m |     const userQuery = userQueryMap[language as keyof typeof userQueryMap] || userQueryMap['en'];
+ [2m420[0m |     
+ [2m421[0m |     // Try different parameter formats to find the correct one
+ [2m422[0m |     const parameters = {
+     : [33;1m          ^^^^^|^^^^[0m
+     :                [33;1m`-- [33;1m`parameters` redefined here[0m[0m
+ [2m423[0m |       // Format 1: Direct file_id (most likely for Coze internal files)
+ [2m424[0m |       file_id: fileId,
+ [2m425[0m |       promptType: model,
+     `----
+
+  [31mx[0m the name `params` is defined multiple times
+     ,-[[36;1;4m/Users/caihongjia/saasfly/apps/nextjs/src/lib/coze-api.ts[0m:400:1]
+ [2m400[0m |   }
+ [2m401[0m | 
+ [2m402[0m |   private async tryWorkflowWithParams(parameters: any, model: string, language: string): Promise<string> {
+ [2m403[0m |     const params = {
+     : [31;1m          ^^^|^^[0m
+     :              [31;1m`-- [31;1mprevious definition of `params` here[0m[0m
+ [2m404[0m |       workflow_id: cozeConfig.workflowId,
+ [2m405[0m |       app_id: cozeConfig.appId,
+ [2m406[0m |       parameters: JSON.stringify(parameters)
+ [2m407[0m |     };
+ [2m408[0m |     // Map language to userQuery based on curl example
+ [2m409[0m |     const userQueryMap = {
+ [2m410[0m |       'en': 'Please describe this image',
+ [2m411[0m |       'zh': '请描述一下这张图片',
+ [2m412[0m |       'ja': 'この画像を説明してください',
+ [2m413[0m |       'ko': '이 이미지를 설명해 주세요',
+ [2m414[0m |       'es': 'Por favor describe esta imagen',
+ [2m415[0m |       'fr': 'Veuillez décrire cette image',
+ [2m416[0m |       'de': 'Bitte beschreibe dieses Bild'
+ [2m417[0m |     };
+ [2m418[0m |     
+ [2m419[0m |     const userQuery = userQueryMap[language as keyof typeof userQueryMap] || userQueryMap['en'];
+ [2m420[0m |     
+ [2m421[0m |     // Try different parameter formats to find the correct one
+ [2m422[0m |     const parameters = {
+ [2m423[0m |       // Format 1: Direct file_id (most likely for Coze internal files)
+ [2m424[0m |       file_id: fileId,
+ [2m425[0m |       promptType: model,
+ [2m426[0m |       userQuery: userQuery
+ [2m427[0m |     };
+ [2m428[0m | 
+ [2m429[0m |     const params = {
+     : [33;1m          ^^^|^^[0m
+     :              [33;1m`-- [33;1m`params` redefined here[0m[0m
+ [2m430[0m |       workflow_id: cozeConfig.workflowId,
+ [2m431[0m |       app_id: cozeConfig.appId,
+ [2m432[0m |       parameters: JSON.stringify(parameters)
+     `----
+
+Import trace for requested module:
+./src/lib/coze-api.ts
+./src/app/[lang]/(marketing)/image-to-prompt/_components/image-to-prompt-generator.tsx
+./src/app/[lang]/(marketing)/image-to-prompt/_components/image-to-prompt-page.tsx
+ ⨯ ./src/lib/coze-api.ts
+Error: 
+  [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/caihongjia/saasfly/apps/nextjs/src/lib/coze-api.ts[0m:526:1]
+ [2m526[0m |       throw new Error(`No data events found in response: ${responseText}`);
+ [2m527[0m |     }
+ [2m528[0m |   }
+ [2m529[0m |       'ja': 'この画像を説明してください',
+     : [31;1m                                                     ^[0m
+ [2m530[0m |       'ko': '이 이미지를 설명해 주세요',
+ [2m531[0m |       'es': 'Por favor describe esta imagen',
+ [2m532[0m |       'fr': 'Veuillez décrire cette image',
+     `----
+
+  [31mx[0m Unexpected token `,`. Expected identifier, string literal, numeric literal or [ for the computed key
+     ,-[[36;1;4m/Users/caihongjia/saasfly/apps/nextjs/src/lib/coze-api.ts[0m:526:1]
+ [2m526[0m |       throw new Error(`No data events found in response: ${responseText}`);
+ [2m527[0m |     }
+ [2m528[0m |   }
+ [2m529[0m |       'ja': 'この画像を説明してください',
+     : [31;1m                                                     ^[0m
+ [2m530[0m |       'ko': '이 이미지를 설명해 주세요',
+ [2m531[0m |       'es': 'Por favor describe esta imagen',
+ [2m532[0m |       'fr': 'Veuillez décrire cette image',
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/lib/coze-api.ts
+./src/app/[lang]/(marketing)/image-to-prompt/_components/image-to-prompt-generator.tsx
+./src/app/[lang]/(marketing)/image-to-prompt/_components/image-to-prompt-page.tsx
+ ⨯ ./src/lib/coze-api.ts
+Error: 
+  [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/caihongjia/saasfly/apps/nextjs/src/lib/coze-api.ts[0m:526:1]
+ [2m526[0m |       throw new Error(`No data events found in response: ${responseText}`);
+ [2m527[0m |     }
+ [2m528[0m |   }
+ [2m529[0m |       'ja': 'この画像を説明してください',
+     : [31;1m                                                     ^[0m
+ [2m530[0m |       'ko': '이 이미지를 설명해 주세요',
+ [2m531[0m |       'es': 'Por favor describe esta imagen',
+ [2m532[0m |       'fr': 'Veuillez décrire cette image',
+     `----
+
+  [31mx[0m Unexpected token `,`. Expected identifier, string literal, numeric literal or [ for the computed key
+     ,-[[36;1;4m/Users/caihongjia/saasfly/apps/nextjs/src/lib/coze-api.ts[0m:526:1]
+ [2m526[0m |       throw new Error(`No data events found in response: ${responseText}`);
+ [2m527[0m |     }
+ [2m528[0m |   }
+ [2m529[0m |       'ja': 'この画像を説明してください',
+     : [31;1m                                                     ^[0m
+ [2m530[0m |       'ko': '이 이미지를 설명해 주세요',
+ [2m531[0m |       'es': 'Por favor describe esta imagen',
+ [2m532[0m |       'fr': 'Veuillez décrire cette image',
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/lib/coze-api.ts
+./src/app/[lang]/(marketing)/image-to-prompt/_components/image-to-prompt-generator.tsx
+./src/app/[lang]/(marketing)/image-to-prompt/_components/image-to-prompt-page.tsx
+ ✓ Compiled in 1350ms (6108 modules)
+ GET /en/image-to-prompt?_rsc=1ce18 200 in 457ms
+ GET /en/image-to-prompt 200 in 252ms
+ GET /zh/login?from=%2Fzh%2F__next_devtools__%2Fclient 200 in 242ms
+ GET /zh/login?from=%2Fzh%2F__next_devtools__%2Fclient 200 in 126ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 69ms
+ GET /zh/login?from=%2Fzh%2F__next_devtools__%2Fclient 200 in 75ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 175ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 161ms
+ GET /zh/login?from=%2Fzh%2F__next_devtools__%2Fclient 200 in 242ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 235ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 209ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 29ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 15ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 308ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 294ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 199ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 201ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 283ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 327ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 123ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 68ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 67ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 65ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 82ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 56ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 53ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 54ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 41ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 35ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 40ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 42ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 39ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 102ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 110ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 75ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 69ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 81ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 91ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 106ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 85ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 57ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 39ms
+ GET /zh/login?from=%2Fapi%2Fauth%2Fsession 200 in 67ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 63ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 35ms
+ POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 17ms
