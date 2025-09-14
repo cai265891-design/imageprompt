@@ -6,7 +6,7 @@ interface ClerkUser {
   id?: string;
   email?: string;
   isAdmin?: boolean;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export async function getSessionUser() {
