@@ -4,7 +4,7 @@ import { ImageToPromptGenerator } from "./image-to-prompt-generator";
 
 export function ImageToPromptPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="w-full">
       <ImageToPromptGenerator />
     </div>
   );

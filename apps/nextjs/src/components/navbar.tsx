@@ -56,7 +56,7 @@ export function NavBar({
         scroll ? (scrolled ? "border-b" : "bg-background/0") : "border-b"
       }`}
     >
-      <div className="container flex h-16 items-center justify-between py-4">
+      <div className="container flex h-14 items-center justify-between py-3">
         {/* 左侧区域 - Home 和 Tools 导航，与 H1 对齐 */}
         <div className="flex items-center gap-8">
           <MainNav items={items} params={{ lang: `${lang}` }} marketing={marketing}>
@@ -64,12 +64,12 @@ export function NavBar({
           </MainNav>
           
           {items?.length ? (
-            <nav className="hidden gap-6 md:flex">
+            <nav className="hidden gap-12 md:flex">
               {items?.map((item, index) => {
                 return (
                   <Link
                     key={index}
-                    href={item.disabled ? "#" : (item.href.startsWith("http") ? item.href : `/${lang}${item.href}`)}
+                    href={item.disabled ? "#" : (item.href.startsWith("http") ? item.href : item.href)}
                     className={cn(
                       "text-sm font-medium transition-colors hover:text-foreground/80",
                       item.href.startsWith(`/${segment}`)

@@ -26,71 +26,6 @@ export default function ImagePromptPage() {
           --radius: 12px;
         }
         
-        /* Navigation styles from example.html */
-        .site-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 18px 0;
-          max-width: 1200px;
-          margin: 0 auto;
-          padding-left: 24px;
-          padding-right: 24px;
-        }
-        
-        .brand {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          color: var(--purple-1);
-          font-weight: 700;
-          font-size: 18px;
-        }
-        
-        .brand svg {
-          width: 30px;
-          height: 30px;
-        }
-        
-        .main-nav {
-          display: flex;
-          gap: 22px;
-          align-items: center;
-        }
-        
-        .main-nav a {
-          color: var(--muted);
-          font-weight: 600;
-          font-size: 15px;
-          padding: 8px 6px;
-          position: relative;
-          text-decoration: none;
-        }
-        
-        .main-nav a.active {
-          color: var(--purple-1);
-        }
-        
-        .main-nav a.active::after {
-          content: "";
-          height: 3px;
-          width: 28px;
-          background: var(--purple-1);
-          border-radius: 3px;
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          bottom: -12px;
-        }
-        
-        .nav-right {
-          display: flex;
-          gap: 12px;
-          align-items: center;
-          color: var(--purple-1);
-          font-weight: 600;
-        }
-        
         /* Hero styles from example.html */
         .hero {
           width: 100%;
@@ -232,8 +167,8 @@ export default function ImagePromptPage() {
           <h1 className="hero-title">Create Better AI Art<br />with <span className="highlight">Image Prompt</span></h1>
           <div className="hero-sub">Inspire ideas, Enhance image prompt, Create masterpieces</div>
           <div className="hero-cta">
-            <Link href="/ai-image-generator" className="btn btn-primary">Try it now !</Link>
-            <Link href="/tutorials" className="btn btn-outline">Tutorials</Link>
+            <Link href="/zh/image-to-prompt" className="btn btn-primary">Try it now !</Link>
+            <Link href="/zh/tutorials" className="btn btn-outline">Tutorials</Link>
           </div>
 
           {/* cards displayed below hero title */}
@@ -305,7 +240,11 @@ export default function ImagePromptPage() {
             <div className="card" role="article">
               <div style={{display: 'flex', gap: '12px', alignItems: 'flex-start'}}>
                 <div className="icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7a2 2 0 0 1 2-2h12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" strokeWidth="2" fill="none"/>
+                    <polyline points="7,10 12,15 17,10" stroke="currentColor" strokeWidth="2" fill="none"/>
+                    <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" strokeWidth="2"/>
+                  </svg>
                 </div>
                 <div style={{flex: 1}}>
                   <h4>Image to Prompt</h4>
@@ -318,7 +257,9 @@ export default function ImagePromptPage() {
             <div className="card" role="article">
               <div style={{display: 'flex', gap: '12px', alignItems: 'flex-start'}}>
                 <div className="icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L9 8l-6 1 4 4-1 6 6-3 6 3-1-6 4-4-6-1z" stroke="currentColor" strokeWidth="2" fill="rgba(127,0,255,0.1)"/>
+                  </svg>
                 </div>
                 <div style={{flex: 1}}>
                   <h4>Image Prompt Generator</h4>
@@ -331,7 +272,9 @@ export default function ImagePromptPage() {
             <div className="card" role="article">
               <div style={{display: 'flex', gap: '12px', alignItems: 'flex-start'}}>
                 <div className="icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                 </div>
                 <div style={{flex: 1}}>
                   <h4>AI Image Generator</h4>
@@ -344,7 +287,11 @@ export default function ImagePromptPage() {
             <div className="card" role="article">
               <div style={{display: 'flex', gap: '12px', alignItems: 'flex-start'}}>
                 <div className="icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke="currentColor" strokeWidth="1.6"/></svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
+                    <path d="M12 1v4m0 14v4m11-7h-4m-14 0H1" stroke="currentColor" strokeWidth="2"/>
+                    <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.3"/>
+                  </svg>
                 </div>
                 <div style={{flex: 1}}>
                   <h4>AI Describe Image</h4>
@@ -377,7 +324,7 @@ export default function ImagePromptPage() {
             ))}
           </div>
           
-          <Link href="/inspiration" className="btn btn-primary">
+          <Link href="/zh/image-to-prompt" className="btn btn-primary">
             Explore More
           </Link>
         </div>
@@ -416,34 +363,6 @@ export default function ImagePromptPage() {
         </div>
       </section>
 
-      {/* Footer - 简化设计 */}
-      <footer className="w-full border-t border-[#e2e8f0] bg-white py-10">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="flex flex-wrap gap-4 justify-center mb-6">
-            {[
-              "Tools", "Image to Prompt", "Batch Image to Prompt", "AI Describe Image",
-              "Image Prompt Generator", "AI Image Generator", "About Us",
-              "Contact Us", "API", "Pricing", "Privacy Policy", "Terms & Conditions"
-            ].map((link, index) => (
-              <Link key={index} href={`/${link.toLowerCase().replace(/\s+/g, '-')}`} className="text-[14px] text-[#4a5568] hover:text-[#7f00ff] transition-colors">
-                {link}
-              </Link>
-            ))}
-          </div>
-          <div className="text-center mb-6">
-            <select defaultValue="en" className="px-3 py-2 border border-[#cbd5e0] rounded-md bg-white text-sm">
-              <option value="en">English</option>
-              <option value="es">Español</option>
-              <option value="fr">Français</option>
-              <option value="de">Deutsch</option>
-              <option value="zh">简体中文</option>
-              <option value="zh-TW">繁體中文</option>
-              <option value="ja">日本語</option>
-            </select>
-          </div>
-          <p className="text-center text-[14px] text-[#718096]">© 2025 EchoFlow, LLC. All rights reserved.</p>
-        </div>
-      </footer>
     </DevTools>
   );
 }

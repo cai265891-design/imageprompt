@@ -69,7 +69,9 @@ export function ImageToPromptGenerator() {
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       handleFile(e.dataTransfer.files[0]);
     }
+
   };
+
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -161,7 +163,7 @@ export function ImageToPromptGenerator() {
   );
 
   return (
-    <div className="container mx-auto max-w-[1100px] p-7">
+    <div className="image-prompt-container mx-auto max-w-[1100px] p-7">
       {/* Upload + Preview row */}
       <div className="upload-row mb-7">
         {/* Left: Upload box */}
@@ -172,8 +174,6 @@ export function ImageToPromptGenerator() {
           onDragLeave={handleDrag}
           onDragOver={handleDrag}
           onDrop={handleDrop}
-          onClick={() => !uploadedImage && fileInputRef.current?.click()}
-          style={{ cursor: uploadedImage ? 'default' : 'pointer' }}
         >
           {uploadedImage ? (
             <div className="space-y-4 w-full">
@@ -192,10 +192,7 @@ export function ImageToPromptGenerator() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    fileInputRef.current?.click();
-                  }}
+                  onClick={() => fileInputRef.current?.click()}
                 >
                   更换图片
                 </Button>
@@ -272,6 +269,7 @@ export function ImageToPromptGenerator() {
             'Generate Prompt'
           )}
         </button>
+        <a className="view-history" href="#" role="link">View History</a>
       </div>
 
       {/* Generated prompt area */}

@@ -12,12 +12,12 @@ export const getMarketingConfig = async ({
   return {
     mainNav: [
       {
-        title: "Home",
-        href: "/",
+        title: "ImagePrompt",
+        href: "/zh/image-prompt",
       },
       {
         title: "Tools",
-        href: "/image-to-prompt",
+        href: "/zh/image-to-prompt",
       },
     ],
     showGitHubStar: false,
