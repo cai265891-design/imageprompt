@@ -45,8 +45,8 @@ export const authOptions: NextAuthOptions = {
 
   providers: [
     GitHubProvider({
-      clientId: env.GITHUB_CLIENT_ID,
-      clientSecret: env.GITHUB_CLIENT_SECRET,
+      clientId: env.GITHUB_CLIENT_ID ?? "",
+      clientSecret: env.GITHUB_CLIENT_SECRET ?? "",
       httpOptions: { timeout: 15000 },
     }),
     EmailProvider({
@@ -63,7 +63,7 @@ export const authOptions: NextAuthOptions = {
 
         try {
           await resend.emails.send({
-            from: env.RESEND_FROM,
+            from: env.RESEND_FROM ?? "noreply@example.com",
             to: identifier,
             subject: authSubject,
             react: MagicLinkEmail({
