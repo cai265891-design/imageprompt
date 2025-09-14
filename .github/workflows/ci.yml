@@ -57,6 +57,13 @@ jobs:
           POSTGRES_PASSWORD: default
           POSTGRES_DB: verceldb
           POSTGRES_URL: postgres://default:default@localhost:5432/verceldb
+          # Clerk Authentication
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_aHVtYmxlLXRyb2xsLTMxLmNsZXJrLmFjY291bnRzLmRldiQ
+          CLERK_SECRET_KEY: sk_test_OAN95uptydywkDryIwcUbV8H4ptF4zJ2XaGMpOrLpb
+          NEXT_PUBLIC_CLERK_SIGN_IN_URL: /sign-in
+          NEXT_PUBLIC_CLERK_SIGN_UP_URL: /sign-up
+          NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: /dashboard
+          NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: /dashboard
 
 
       - name: lint and type-check
