@@ -58,7 +58,7 @@ export function NavBar({
     >
       <div className="container flex h-14 items-center justify-between py-3">
         {/* 左侧区域 - Home 和 Tools 导航，与 H1 对齐 */}
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-40">
           <MainNav items={items} params={{ lang: `${lang}` }} marketing={marketing}>
             {children}
           </MainNav>

@@ -12,7 +12,7 @@ export const getMarketingConfig = async ({
   return {
     mainNav: [
       {
-        title: "ImagePrompt",
+        title: "home",
         href: "/zh/image-prompt",
       },
       {

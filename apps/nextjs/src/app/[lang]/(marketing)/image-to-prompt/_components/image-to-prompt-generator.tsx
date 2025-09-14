@@ -164,6 +164,9 @@ export function ImageToPromptGenerator() {
 
   return (
     <div className="image-prompt-container mx-auto max-w-[1100px] p-7">
+      {/* H1 Title */}
+      <h1 className="text-3xl font-bold text-center mb-8 text-gray-900">Image to Prompt</h1>
+      
       {/* Upload + Preview row */}
       <div className="upload-row mb-7">
         {/* Left: Upload box */}
