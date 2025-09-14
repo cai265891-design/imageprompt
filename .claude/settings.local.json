@@ -34,7 +34,8 @@
       "Bash(xargs:*)",
       "WebFetch(domain:localhost)",
       "Bash(npx prettier:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
