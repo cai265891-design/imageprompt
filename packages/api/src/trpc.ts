@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
-import {initTRPC, TRPCError} from "@trpc/server";
-import {auth, currentUser, getAuth} from "@clerk/nextjs/server";
+import { initTRPC, TRPCError } from "@trpc/server";
+import { auth, currentUser, getAuth } from "@clerk/nextjs/server";
 import { ZodError } from "zod";
 
 import { transformer } from "./transformer";
@@ -48,6 +48,5 @@ const isAuthed = t.middleware(({ next, ctx }) => {
   // Make ctx.userId non-nullable in protected procedures
   return next({ ctx: { userId: ctx.userId } });
 });
-
 
 export const protectedProcedure = procedure.use(isAuthed);

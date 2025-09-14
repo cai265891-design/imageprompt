@@ -32,7 +32,8 @@
       "Bash(npx tsc:*)",
       "Bash(ls:*)",
       "Bash(xargs:*)",
-      "WebFetch(domain:localhost)"
+      "WebFetch(domain:localhost)",
+      "Bash(npx prettier:*)"
     ],
     "deny": [],
     "ask": []
