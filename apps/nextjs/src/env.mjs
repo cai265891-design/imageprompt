@@ -9,8 +9,8 @@ export const env = createEnv({
     GITHUB_CLIENT_ID: z.string().optional(),
     GITHUB_CLIENT_SECRET: z.string().optional(),
     
-    // Clerk 配置（必需）
-    CLERK_SECRET_KEY: z.string().min(1),
+    // Clerk 配置（构建时可选，运行时必须）
+    CLERK_SECRET_KEY: z.string().optional(),
     
     // Stripe 配置（可选）
     STRIPE_API_KEY: z.string().optional(),
@@ -20,7 +20,7 @@ export const env = createEnv({
     NEXT_PUBLIC_APP_URL: z.string().min(1),
     
     // Clerk 配置（必需）
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().optional(),
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().optional(),
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().optional(),
     NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: z.string().optional(),
