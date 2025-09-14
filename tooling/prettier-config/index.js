@@ -1,10 +1,7 @@
-import { fileURLToPath } from "url";
+const { fileURLToPath } = require("url");
+const path = require("path");
 
-/** @typedef  {import("prettier").Config} PrettierConfig */
-/** @typedef {import("prettier-plugin-tailwindcss").PluginOptions} TailwindConfig */
-/** @typedef  {import("@ianvs/prettier-plugin-sort-imports").PluginConfig} SortImportsConfig */
-
-/** @type { PrettierConfig | SortImportsConfig | TailwindConfig } */
+/** @type {import("prettier").Config} */
 const config = {
   semi: true,
   trailingComma: "es5",
@@ -16,9 +13,7 @@ const config = {
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss",
   ],
-  tailwindConfig: fileURLToPath(
-    new URL("../../tooling/tailwind-config/index.ts", import.meta.url),
-  ),
+  tailwindConfig: path.resolve(__dirname, "../tailwind-config/index.ts"),
   importOrder: [
     "^(react/(.*)$)|^(react$)|^(react-native(.*)$)",
     "^(next/(.*)$)|^(next$)",
@@ -34,4 +29,4 @@ const config = {
   importOrderTypeScriptVersion: "5.4.5",
 };
 
-export default config;
+module.exports = config;
