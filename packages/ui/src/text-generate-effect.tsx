@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { motion, stagger, useAnimate } from "framer-motion";
 
@@ -16,7 +16,7 @@ const TextGenerateEffectImpl = ({
   const [scope, animate] = useAnimate();
   const wordsArray = words.split(" ");
 
-  useEffect(() => {
+  const animateText = useCallback(() => {
     void animate(
       "span",
       {
@@ -27,7 +27,11 @@ const TextGenerateEffectImpl = ({
         delay: stagger(0.1),
       },
     );
-  }, [scope.current, words]);
+  }, [animate]);
+
+  useEffect(() => {
+    animateText();
+  }, [animateText, words]);
 
   const renderWords = () => {
     return (
@@ -57,9 +61,13 @@ const TextGenerateEffectImpl = ({
   );
 };
 
-export const TextGenerateEffect = dynamic(
+const TextGenerateEffect = dynamic(
   () => Promise.resolve(TextGenerateEffectImpl),
   {
     ssr: false,
   },
 );
+
+TextGenerateEffect.displayName = "TextGenerateEffect";
+
+export { TextGenerateEffect };

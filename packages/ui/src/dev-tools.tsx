@@ -42,9 +42,12 @@ export function DevTools({
   };
 
   return (
-    <div
-      className={cn("relative group", className)}
+    <button
+      type="button"
+      className={cn("relative group text-left", className)}
       onClick={handleClick}
+      disabled={!filePath}
+      aria-label={filePath ? `跳转到 ${filePath.split('/').pop()}:${lineNumber}` : undefined}
       style={{ cursor: filePath ? "pointer" : "default" }}
     >
       {children}
@@ -54,7 +57,7 @@ export function DevTools({
           <div className="text-xs opacity-75">点击跳转到源码</div>
         </div>
       )}
-    </div>
+    </button>
   );
 }
 
@@ -67,7 +70,7 @@ export function withDevTools<P extends object>(
   filePath: string,
   lineNumber?: number,
 ) {
-  return React.forwardRef<any, P>((props, ref) => {
+  const ForwardedComponent = React.forwardRef<any, P>((props, ref) => {
     if (process.env.NODE_ENV !== "development") {
       return <Component {...props} ref={ref} />;
     }
@@ -78,4 +81,8 @@ export function withDevTools<P extends object>(
       </DevTools>
     );
   });
+
+  ForwardedComponent.displayName = `withDevTools(${Component.displayName || Component.name || 'Component'})`;
+  
+  return ForwardedComponent;
 }

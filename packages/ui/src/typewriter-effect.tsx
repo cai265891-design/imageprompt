@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { motion, stagger, useAnimate, useInView } from "framer-motion";
 
@@ -28,7 +28,8 @@ export const TypewriterEffectImpl = ({
 
   const [scope, animate] = useAnimate();
   const isInView = useInView(scope);
-  useEffect(() => {
+  
+  const animateText = useCallback(() => {
     if (isInView) {
       void animate(
         "span",
@@ -44,7 +45,11 @@ export const TypewriterEffectImpl = ({
         },
       );
     }
-  }, [isInView]);
+  }, [animate, isInView]);
+  
+  useEffect(() => {
+    animateText();
+  }, [animateText]);
 
   const renderWords = () => {
     return (
@@ -94,9 +99,13 @@ export const TypewriterEffectImpl = ({
   );
 };
 
-export const TextGenerateEffect = dynamic(
+const TextGenerateEffect = dynamic(
   () => Promise.resolve(TypewriterEffectImpl),
   {
     ssr: false,
   },
 );
+
+TextGenerateEffect.displayName = "TextGenerateEffect";
+
+export { TextGenerateEffect };
