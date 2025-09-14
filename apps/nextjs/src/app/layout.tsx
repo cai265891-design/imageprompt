@@ -10,7 +10,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { cn } from "@saasfly/ui";
 import { Toaster } from "@saasfly/ui/toaster";
 
-import { NextAuthProvider } from "~/components/nextauth-provider";
+import { ClerkProviderClient } from "~/components/clerk-provider";
 import { TailwindIndicator } from "~/components/tailwind-indicator";
 import { ThemeProvider } from "~/components/theme-provider";
 import { i18n } from "~/config/i18n-config";
@@ -78,7 +78,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <NextAuthProvider>
+    <ClerkProviderClient>
       <html lang="en" suppressHydrationWarning>
         <head />
         {/*<Suspense>*/}
@@ -105,6 +105,6 @@ export default function RootLayout({
           </ThemeProvider>
         </body>
       </html>
-    </NextAuthProvider>
+    </ClerkProviderClient>
   );
 }

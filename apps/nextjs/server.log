@@ -1949,3 +1949,38 @@ Import trace for requested module:
  POST /zh/login?from=%2Fapi%2Fauth%2F_log 200 in 22ms
  ○ Compiling /[lang]/tutorials ...
  ✓ Compiled /[lang]/tutorials in 1034ms (6712 modules)
+ ✓ Compiled in 2.1s (2543 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (121kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ✓ Compiled in 797ms (2302 modules)
+ ✓ Compiled in 1782ms (6723 modules)
+ ⨯ ./src/app/layout.tsx
+Error: 
+  [31mx[0m Unexpected token `ClerkProviderClient`. Expected jsx identifier
+    ,-[[36;1;4m/Users/caihongjia/saasfly/apps/nextjs/src/app/layout.tsx[0m:78:1]
+ [2m78[0m |   children: React.ReactNode;
+ [2m79[0m | }) {
+ [2m80[0m |   return (
+ [2m81[0m |     <ClerkProviderClient>
+    : [31;1m     ^^^^^^^^^^^^^^^^^^^[0m
+ [2m82[0m |       <html lang="en" suppressHydrationWarning>
+ [2m83[0m |         <head />
+ [2m84[0m |         {/*<Suspense>*/}
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/layout.tsx
+ ✓ Compiled in 3.6s (7143 modules)
+ ✓ Compiled in 268ms (2430 modules)
+ ✓ Compiled in 1702ms (7143 modules)
+ ✓ Compiled in 654ms (2671 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (121kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ✓ Compiled in 855ms (2430 modules)
+ ✓ Compiled in 323ms (2430 modules)
+ ✓ Compiled in 381ms (2430 modules)
+ ✓ Compiled in 338ms (2430 modules)
+ ✓ Compiled in 990ms (2672 modules)
+ ✓ Compiled in 901ms (2430 modules)
+ ✓ Compiled in 1563ms (4713 modules)
