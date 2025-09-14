@@ -63,16 +63,16 @@ export class CozeAPI {
   /**
    * Generate image prompt from file - Updated to use direct file ID approach
    * Instead of generating signed URLs, use file ID directly in workflow parameters
+   * Simplified version without language parameter
    */
   async generateImagePrompt(
     file: File, 
-    model: string, 
-    language: string
+    model: string
   ): Promise<string> {
     try {
       console.log('=== Starting image prompt generation ===');
       console.log('File:', file.name, 'Size:', file.size, 'Type:', file.type);
-      console.log('Model:', model, 'Language:', language);
+      console.log('Model:', model);
       console.log('Config - Workflow ID:', cozeConfig.workflowId, 'App ID:', cozeConfig.appId);
       
       // Step 1: Upload file to Coze
@@ -82,7 +82,7 @@ export class CozeAPI {
       
       // Step 2: Run workflow with file ID directly (no signed URL needed)
       console.log('Step 2: Running workflow with file ID...');
-      const prompt = await this.runWorkflowWithFileId(fileId, model, language);
+      const prompt = await this.runWorkflowWithFileId(fileId, model);
       console.log('Workflow completed successfully');
       
       return prompt;
@@ -116,12 +116,11 @@ export class CozeAPI {
   /**
    * Run workflow with file ID directly - Alternative approach using file_id
    * This avoids the need for signed URLs
-   * Tries multiple parameter formats to find the correct one
+   * Simplified version without language parameter
    */
   async runWorkflowWithFileId(
     fileId: string, 
-    model: string, 
-    language: string
+    model: string
   ): Promise<string> {
     // Try different parameter formats to find the correct one
     const formats = [
@@ -130,7 +129,7 @@ export class CozeAPI {
         params: {
           file_id: fileId,
           promptType: model,
-          userQuery: this.getUserQuery(language)
+          userQuery: 'Please describe this image'
         }
       },
       {
@@ -138,7 +137,7 @@ export class CozeAPI {
         params: {
           img: JSON.stringify({ file_id: fileId }),
           promptType: model,
-          userQuery: this.getUserQuery(language)
+          userQuery: 'Please describe this image'
         }
       },
       {
@@ -146,8 +145,7 @@ export class CozeAPI {
         params: {
           image: { file_id: fileId },
           model: model,
-          language: language,
-          userQuery: this.getUserQuery(language)
+          userQuery: 'Please describe this image'
         }
       }
     ];
@@ -155,7 +153,7 @@ export class CozeAPI {
     for (const format of formats) {
       try {
         console.log(`Trying ${format.name}...`);
-        const result = await this.tryWorkflowWithParams(format.params, model, language);
+        const result = await this.tryWorkflowWithParams(format.params, model);
         console.log(`Success with ${format.name}!`);
         return result;
       } catch (error) {
@@ -169,20 +167,7 @@ export class CozeAPI {
     throw new Error('All parameter formats failed');
   }
 
-  private getUserQuery(language: string): string {
-    const userQueryMap = {
-      'en': 'Please describe this image',
-      'zh': '请描述一下这张图片',
-      'ja': 'この画像を説明してください',
-      'ko': '이 이미지를 설명해 주세요',
-      'es': 'Por favor describe esta imagen',
-      'fr': 'Veuillez décrire cette image',
-      'de': 'Bitte beschreibe dieses Bild'
-    };
-    return userQueryMap[language as keyof typeof userQueryMap] || userQueryMap['en'];
-  }
-
-  private async tryWorkflowWithParams(parameters: any, model: string, language: string): Promise<string> {
+  private async tryWorkflowWithParams(parameters: any, model: string): Promise<string> {
     const requestParams = {
       workflow_id: cozeConfig.workflowId,
       app_id: cozeConfig.appId,

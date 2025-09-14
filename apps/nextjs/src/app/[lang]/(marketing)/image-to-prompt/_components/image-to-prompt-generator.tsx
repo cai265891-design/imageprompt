@@ -3,7 +3,6 @@
 import { useState, useRef } from "react";
 import "./styles.css";
 import { Button } from "@saasfly/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@saasfly/ui/select";
 import { Loader2, Copy, Check } from "lucide-react";
 import Image from "next/image";
 import { cozeAPI } from "../../../../../lib/coze-api";
@@ -43,24 +42,12 @@ const aiModels: AIModel[] = [
   }
 ];
 
-const languages = [
-  { value: "en", label: "English" },
-  { value: "zh", label: "中文 (Chinese)" },
-  { value: "ja", label: "日本語" },
-  { value: "ko", label: "한국어" },
-  { value: "es", label: "Español" },
-  { value: "fr", label: "Français" },
-  { value: "de", label: "Deutsch" }
-];
-
 export function ImageToPromptGenerator() {
   const [uploadedImage, setUploadedImage] = useState<UploadedImage | null>(null);
   const [selectedModel, setSelectedModel] = useState("general");
-  const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [dragActive, setDragActive] = useState(false);
-  const [activeTab, setActiveTab] = useState("upload");
   const [copied, setCopied] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -121,11 +108,10 @@ export function ImageToPromptGenerator() {
       // Map the selected model to the Coze workflow parameter
       const cozeModel = cozeConfig.modelMapping[selectedModel] || 'normal';
       
-      // Call Coze API to generate prompt
+      // Call Coze API to generate prompt (without language parameter)
       const prompt = await cozeAPI.generateImagePrompt(
         uploadedImage.file,
-        cozeModel,
-        selectedLanguage
+        cozeModel
       );
       
       setGeneratedPrompt(prompt);
@@ -176,26 +162,6 @@ export function ImageToPromptGenerator() {
 
   return (
     <div className="container mx-auto max-w-[1100px] p-7">
-      {/* Tabs */}
-      <div className="flex gap-3 items-center mb-5" role="tablist" aria-label="Image input tabs">
-        <div 
-          className={`tab ${activeTab === 'upload' ? 'active' : ''}`}
-          role="tab"
-          aria-selected={activeTab === 'upload'}
-          onClick={() => setActiveTab('upload')}
-        >
-          Upload Image
-        </div>
-        <div 
-          className={`tab ${activeTab === 'url' ? 'active' : ''}`}
-          role="tab"
-          aria-selected={activeTab === 'url'}
-          onClick={() => setActiveTab('url')}
-        >
-          Input Image URL
-        </div>
-      </div>
-
       {/* Upload + Preview row */}
       <div className="upload-row mb-7">
         {/* Left: Upload box */}
@@ -290,27 +256,6 @@ export function ImageToPromptGenerator() {
         ))}
       </div>
 
-      {/* Prompt language + Generate */}
-      <div className="controls mb-3" aria-label="Prompt controls">
-        <div className="flex items-center gap-3">
-          <label htmlFor="prompt-language" className="text-sm font-medium text-gray-700 whitespace-nowrap">
-            Prompt Language
-          </label>
-          <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-            <SelectTrigger id="prompt-language" className="select min-w-[120px]">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {languages.map((lang) => (
-                <SelectItem key={lang.value} value={lang.value}>
-                  {lang.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-
       <div className="generate-row mb-5">
         <button 
           className={`btn-generate ${!uploadedImage ? 'disabled' : 'primary'}`}
@@ -327,7 +272,6 @@ export function ImageToPromptGenerator() {
             'Generate Prompt'
           )}
         </button>
-        <a className="view-history" href="#" role="link">View History</a>
       </div>
 
       {/* Generated prompt area */}
