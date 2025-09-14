@@ -18,7 +18,12 @@ interface MainNavProps {
   marketing?: Record<string, string | object>;
 }
 
-export function MainNav({ items, children, params: { lang }, marketing }: MainNavProps) {
+export function MainNav({
+  items,
+  children,
+  params: { lang },
+  marketing,
+}: MainNavProps) {
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
   const toggleMenu = () => {
     setShowMobileMenu(!showMobileMenu);
@@ -29,11 +34,19 @@ export function MainNav({ items, children, params: { lang }, marketing }: MainNa
   return (
     <div className="flex gap-6 md:gap-10">
       <div className="flex items-center">
-        <Link href={`/${lang}`} className="hidden items-center space-x-2 md:flex">
-        </Link>
+        <Link
+          href={`/${lang}`}
+          className="hidden items-center space-x-2 md:flex"
+        ></Link>
 
-        <Link href="/ai-image-generator" className="ml-4 hidden md:flex lg:flex xl:flex">
-          <DevTools filePath="apps/nextjs/src/components/main-nav.tsx" lineNumber={35}>
+        <Link
+          href="/ai-image-generator"
+          className="ml-4 hidden md:flex lg:flex xl:flex"
+        >
+          <DevTools
+            filePath="apps/nextjs/src/components/main-nav.tsx"
+            lineNumber={35}
+          >
             <div className="flex items-center space-x-2 text-lg font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent hover:from-purple-700 hover:to-pink-700 transition-all duration-200">
               <span>🎨</span>
               <span>ImagePrompt</span>
@@ -46,7 +59,7 @@ export function MainNav({ items, children, params: { lang }, marketing }: MainNa
         className="flex items-center space-x-2 md:hidden"
         onClick={() => setShowMobileMenu(!showMobileMenu)}
       >
-        {showMobileMenu ? <Icons.Close/> : <Icons.Logo/>}
+        {showMobileMenu ? <Icons.Close /> : <Icons.Logo />}
         <span className="font-bold">Menu</span>
       </button>
       {showMobileMenu && items && (

@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from 'react';
-import { initDevTools } from '~/lib/dev-tools-client';
+import { useEffect } from "react";
+import { initDevTools } from "~/lib/dev-tools-client";
 
 /**
  * 开发工具提供者组件
@@ -9,7 +9,7 @@ import { initDevTools } from '~/lib/dev-tools-client';
  */
 export function DevToolsProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       initDevTools();
     }
   }, []);

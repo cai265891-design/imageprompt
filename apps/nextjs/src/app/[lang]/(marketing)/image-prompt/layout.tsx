@@ -12,7 +12,7 @@ export default async function ImagePromptLayout({
   };
 }) {
   const dict = await getDictionary(lang);
-  
+
   return (
     <>
       <ModalProvider dict={dict.login} />

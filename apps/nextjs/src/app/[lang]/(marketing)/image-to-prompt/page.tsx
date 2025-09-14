@@ -5,10 +5,6 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export default function Page({
-  params,
-}: {
-  params: { lang: Locale };
-}) {
+export default function Page({ params }: { params: { lang: Locale } }) {
   return <ImageToPromptPage />;
 }

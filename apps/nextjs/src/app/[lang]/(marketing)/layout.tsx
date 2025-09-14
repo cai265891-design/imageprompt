@@ -21,8 +21,10 @@ export default async function MarketingLayout({
 }) {
   const dict = await getDictionary(lang);
   const user = await getCurrentUser();
-  const marketingConfig = await getMarketingConfig({ params: { lang: `${lang}` } });
-  
+  const marketingConfig = await getMarketingConfig({
+    params: { lang: `${lang}` },
+  });
+
   return (
     <DevToolsProvider>
       <div className="flex min-h-screen flex-col">

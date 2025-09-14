@@ -6,7 +6,10 @@ import { AnimatedGradientText } from "@saasfly/ui/animated-gradient-text";
 
 export function DocumentGuide({ children }: { children: ReactNode }) {
   return (
-    <DevTools filePath="apps/nextjs/src/components/document-guide.tsx" lineNumber={8}>
+    <DevTools
+      filePath="apps/nextjs/src/components/document-guide.tsx"
+      lineNumber={8}
+    >
       <AnimatedGradientText>
         🚀 <hr className="mx-2 h-4 w-[1px] shrink-0 bg-gray-300" />{" "}
         <span

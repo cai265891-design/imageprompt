@@ -5,7 +5,11 @@ import EmailProvider from "next-auth/providers/email";
 
 import { MagicLinkEmail, resend, siteConfig } from "@saasfly/common";
 
-import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
+import type {
+  GetServerSidePropsContext,
+  NextApiRequest,
+  NextApiResponse,
+} from "next";
 
 import { db } from "./db";
 import { env } from "./env.mjs";

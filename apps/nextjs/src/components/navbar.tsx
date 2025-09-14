@@ -59,17 +59,27 @@ export function NavBar({
       <div className="container flex h-14 items-center justify-between py-3">
         {/* 左侧区域 - Home 和 Tools 导航，与 H1 对齐 */}
         <div className="flex items-center gap-40">
-          <MainNav items={items} params={{ lang: `${lang}` }} marketing={marketing}>
+          <MainNav
+            items={items}
+            params={{ lang: `${lang}` }}
+            marketing={marketing}
+          >
             {children}
           </MainNav>
-          
+
           {items?.length ? (
             <nav className="hidden gap-12 md:flex">
               {items?.map((item, index) => {
                 return (
                   <Link
                     key={index}
-                    href={item.disabled ? "#" : (item.href.startsWith("http") ? item.href : item.href)}
+                    href={
+                      item.disabled
+                        ? "#"
+                        : item.href.startsWith("http")
+                          ? item.href
+                          : item.href
+                    }
                     className={cn(
                       "text-sm font-medium transition-colors hover:text-foreground/80",
                       item.href.startsWith(`/${segment}`)
@@ -85,7 +95,7 @@ export function NavBar({
             </nav>
           ) : null}
         </div>
-        
+
         {/* 右侧区域 - 用户操作 */}
         <div className="flex items-center space-x-3">
           {rightElements}
@@ -95,15 +105,16 @@ export function NavBar({
               <GitHubStar />
             </div>
           )}
-          
-          {config?.showLocaleChange !== false && (
-            <LocaleChange url={"/"} />
-          )}
-          
+
+          {config?.showLocaleChange !== false && <LocaleChange url={"/"} />}
+
           {!user ? (
             config?.loginStyle === "imageprompt" ? (
               <Link href={`/${lang}/login`}>
-                <span className="text-sm font-bold" style={{ color: 'var(--purple-1)' }}>
+                <span
+                  className="text-sm font-bold"
+                  style={{ color: "var(--purple-1)" }}
+                >
                   Login
                 </span>
               </Link>

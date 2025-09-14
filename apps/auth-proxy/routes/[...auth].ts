@@ -3,8 +3,8 @@ import GitHub from "@auth/core/providers/github";
 import { eventHandler, toWebRequest } from "h3";
 
 // 声明 Edge Runtime
-export const runtime = 'edge';
-export const preferredRegion = ['iad1', 'hnd1'];
+export const runtime = "edge";
+export const preferredRegion = ["iad1", "hnd1"];
 
 export default eventHandler(async (event) =>
   Auth(toWebRequest(event), {

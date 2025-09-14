@@ -27,7 +27,6 @@ export function UserAccountNav({
   params: { lang },
   dict,
 }: UserAccountNavProps) {
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -62,10 +61,9 @@ export function UserAccountNav({
           className="cursor-pointer"
           onSelect={(event) => {
             event.preventDefault();
-            signOut({ callbackUrl: `/${lang}/login` })
-              .catch((error) => {
-                console.error("Error during sign out:", error);
-              })
+            signOut({ callbackUrl: `/${lang}/login` }).catch((error) => {
+              console.error("Error during sign out:", error);
+            });
           }}
         >
           {dict.sign_out}

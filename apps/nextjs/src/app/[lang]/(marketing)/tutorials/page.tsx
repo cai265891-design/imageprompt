@@ -19,26 +19,31 @@ export default function TutorialsPage({
           <p className="text-center text-gray-600 mb-8">
             Learn how to use our AI-powered image prompt tools effectively.
           </p>
-          
+
           <div className="grid gap-8 mt-12">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-2xl font-semibold mb-4">Getting Started</h2>
               <p className="text-gray-600">
-                Learn the basics of image prompt generation and how to get the best results from our AI tools.
+                Learn the basics of image prompt generation and how to get the
+                best results from our AI tools.
               </p>
             </div>
-            
+
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4">Advanced Techniques</h2>
+              <h2 className="text-2xl font-semibold mb-4">
+                Advanced Techniques
+              </h2>
               <p className="text-gray-600">
-                Discover advanced prompting techniques to create more sophisticated and detailed AI-generated images.
+                Discover advanced prompting techniques to create more
+                sophisticated and detailed AI-generated images.
               </p>
             </div>
-            
+
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-2xl font-semibold mb-4">Best Practices</h2>
               <p className="text-gray-600">
-                Tips and tricks for writing effective prompts that produce consistent, high-quality results.
+                Tips and tricks for writing effective prompts that produce
+                consistent, high-quality results.
               </p>
             </div>
           </div>

@@ -1,7 +1,11 @@
 import "server-only";
 
 import { cookies } from "next/headers";
-import { createTRPCProxyClient, loggerLink, TRPCClientError } from "@trpc/client";
+import {
+  createTRPCProxyClient,
+  loggerLink,
+  TRPCClientError,
+} from "@trpc/client";
 import { getToken } from "next-auth/jwt";
 
 import { AppRouter } from "@saasfly/api";
@@ -17,7 +21,7 @@ export const createTRPCContext = async (opts: {
   headers: Headers;
   userId?: string;
   isAdmin?: boolean;
-// eslint-disable-next-line @typescript-eslint/require-await
+  // eslint-disable-next-line @typescript-eslint/require-await
 }) => {
   return {
     userId: opts.userId,
@@ -26,17 +30,16 @@ export const createTRPCContext = async (opts: {
   };
 };
 
-
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
  * handling a tRPC call from a React Server Component.
  */
 const createContext = cache(async () => {
-  const token = await getToken({ 
+  const token = await getToken({
     req: { headers: { cookie: cookies().toString() } } as any,
-    secret: process.env.NEXTAUTH_SECRET 
+    secret: process.env.NEXTAUTH_SECRET,
   });
-  
+
   return createTRPCContext({
     headers: new Headers({
       cookie: cookies().toString(),
@@ -60,7 +63,7 @@ export const trpc = createTRPCProxyClient<AppRouter>({
      * Components always run on the server, we can just call the procedure as a function.
      */
     () =>
-      ({op}) =>
+      ({ op }) =>
         observable((observer) => {
           createContext()
             .then((ctx) => {
@@ -73,7 +76,7 @@ export const trpc = createTRPCProxyClient<AppRouter>({
               });
             })
             .then((data) => {
-              observer.next({result: {data}});
+              observer.next({ result: { data } });
               observer.complete();
             })
             .catch((cause: TRPCErrorResponse) => {
@@ -82,4 +85,4 @@ export const trpc = createTRPCProxyClient<AppRouter>({
         }),
   ],
 });
-export {type RouterInputs, type RouterOutputs} from "@saasfly/api";
+export { type RouterInputs, type RouterOutputs } from "@saasfly/api";

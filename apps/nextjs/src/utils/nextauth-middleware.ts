@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getToken } from 'next-auth/jwt';
+import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 
@@ -26,8 +26,8 @@ export const isPublicRoute = (request: NextRequest): boolean => {
     new RegExp("/(\\w{2}/)?tutorials(.*)"),
     new RegExp("^/\\w{2}$"), // root with locale
   ];
-  
-  return publicPatterns.some(pattern => pattern.test(pathname));
+
+  return publicPatterns.some((pattern) => pattern.test(pathname));
 };
 
 export function getLocale(request: NextRequest): string | undefined {
@@ -36,7 +36,9 @@ export function getLocale(request: NextRequest): string | undefined {
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
   const locales = Array.from(i18n.locales);
   // Use negotiator and intl-localematcher to get best locale
-  const languages = new Negotiator({ headers: negotiatorHeaders }).languages(locales);
+  const languages = new Negotiator({ headers: negotiatorHeaders }).languages(
+    locales,
+  );
   return matchLocale(languages, locales, i18n.defaultLocale);
 }
 
@@ -59,15 +61,15 @@ export async function middleware(req: NextRequest) {
   if (isWebhooksRoute) {
     return NextResponse.next();
   }
-  
+
   const pathname = req.nextUrl.pathname;
-  
+
   // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale) =>
       !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
   );
-  
+
   // Redirect if there is no locale
   if (!isNoRedirect(req) && pathnameIsMissingLocale) {
     const locale = getLocale(req);
@@ -85,10 +87,10 @@ export async function middleware(req: NextRequest) {
 
   // Get token from NextAuth
   const token = await getToken({ req, secret: env.NEXTAUTH_SECRET });
-  
+
   const isAuth = !!token;
   let isAdmin = false;
-  
+
   if (env.ADMIN_EMAIL && token?.email) {
     const adminEmails = env.ADMIN_EMAIL.split(",");
     isAdmin = adminEmails.includes(token.email);
@@ -97,24 +99,24 @@ export async function middleware(req: NextRequest) {
   const isAuthPage = /^\/[a-zA-Z]{2,}\/(login|register)/.test(pathname);
   const isAuthRoute = req.nextUrl.pathname.startsWith("/api/trpc/");
   const locale = getLocale(req);
-  
+
   if (isAuthRoute && isAuth) {
     return NextResponse.next();
   }
-  
+
   if (req.nextUrl.pathname.startsWith("/admin/dashboard")) {
     if (!isAuth || !isAdmin)
       return NextResponse.redirect(new URL(`/admin/login`, req.url));
     return NextResponse.next();
   }
-  
+
   if (isAuthPage) {
     if (isAuth) {
       return NextResponse.redirect(new URL(`/${locale}/dashboard`, req.url));
     }
     return NextResponse.next();
   }
-  
+
   if (!isAuth) {
     let from = req.nextUrl.pathname;
     if (req.nextUrl.search) {
@@ -133,6 +135,6 @@ export const config = {
     "/((?!.*\\..*|_next).*)",
     "/",
     "/(api|trpc)(.*)",
-    "/((?!_next|[^?]*\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)"
+    "/((?!_next|[^?]*.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
   ],
 };

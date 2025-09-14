@@ -33,7 +33,8 @@
       "Bash(ls:*)",
       "Bash(xargs:*)",
       "WebFetch(domain:localhost)",
-      "Bash(npx prettier:*)"
+      "Bash(npx prettier:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

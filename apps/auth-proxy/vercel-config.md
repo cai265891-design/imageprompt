@@ -1,6 +1,7 @@
 # Auth-Proxy Vercel 部署配置指南
 
 ## 问题
+
 Vercel 错误地将 auth-proxy 识别为 Next.js 应用，导致寻找 `.next/routes-manifest.json` 文件失败。
 
 ## 解决方案
@@ -8,10 +9,12 @@ Vercel 错误地将 auth-proxy 识别为 Next.js 应用，导致寻找 `.next/ro
 ### 方法 1: 重新创建 Vercel 项目（推荐）
 
 1. **删除现有的 auth-proxy Vercel 项目**
+
    - 登录 Vercel 控制台
    - 找到 auth-proxy 项目并删除
 
 2. **重新创建项目并正确配置**
+
    - 点击 "New Project"
    - 选择相同的 GitHub 仓库
    - **重要：** 在 "Root Directory" 中选择 `apps/auth-proxy`
@@ -30,6 +33,7 @@ Vercel 错误地将 auth-proxy 识别为 Next.js 应用，导致寻找 `.next/ro
 如果不能重新创建项目，尝试：
 
 1. **进入项目设置**
+
    - General → Root Directory → 设置为 `apps/auth-proxy`
    - Build & Development Settings → Framework → 选择 "Other"
    - Build Command → `bun run build`
@@ -46,6 +50,7 @@ Vercel 错误地将 auth-proxy 识别为 Next.js 应用，导致寻找 `.next/ro
 ## 验证部署
 
 部署成功后应该看到：
+
 - 构建输出在 `.vercel/output/`
 - 不再寻找 `.next/routes-manifest.json`
 - 函数正确部署为边缘函数或 Node.js 函数
