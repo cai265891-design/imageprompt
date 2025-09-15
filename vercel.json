@@ -1,4 +1,5 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "github": {
     "silent": true
   },
@@ -9,5 +10,34 @@
   "nodeVersion": "18.x",
   "env": {
     "NEXT_TELEMETRY_DISABLED": "1"
-  }
+  },
+  "functions": {
+    "apps/nextjs/.next/server/**/*.js": {
+      "maxDuration": 30,
+      "memory": 1024
+    }
+  },
+  "outputDirectory": "apps/nextjs/.next",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    }
+  ],
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./"
 }
