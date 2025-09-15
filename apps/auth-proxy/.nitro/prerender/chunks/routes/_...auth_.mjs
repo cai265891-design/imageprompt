@@ -37,52 +37,43 @@ function isAuthRequest(pathname) {
   if (!pathname)
     return false;
   const authPatterns = [
-    // 标准 NextAuth 路由
+    // 标准 NextAuth 路由（严格匹配）
     /^\/api\/auth(\/.*)?$/,
     // /api/auth/*
     /^\/_next\/auth(\/.*)?$/,
     // /_next/auth/*
-    // GitHub OAuth 相关
+    // GitHub OAuth 相关（严格匹配）
     /^\/auth\/github(\/.*)?$/,
     // /auth/github/*
-    /^\/auth\/callback(\/.*)?$/,
-    // /auth/callback/*
+    /^\/auth\/callback\/github(\/.*)?$/,
+    // /auth/callback/github/*
     /^\/oauth\/github(\/.*)?$/,
     // /oauth/github/*
-    // 认证动作
-    /^\/auth\/signin(\/.*)?$/,
-    // /auth/signin/*
-    /^\/auth\/signout(\/.*)?$/,
-    // /auth/signout/*
-    /^\/auth\/session(\/.*)?$/,
-    // /auth/session/*
-    /^\/auth\/providers(\/.*)?$/,
-    // /auth/providers/*
-    // 通用认证路径
-    /^\/auth(\/.*)?$/,
-    // /auth/*
-    /^\/oauth(\/.*)?$/,
-    // /oauth/*
-    /^\/login(\/.*)?$/,
-    // /login/*
-    /^\/logout(\/.*)?$/,
-    // /logout/*
-    // 特殊处理：如果路径包含常见的认证关键词
-    /\/callback\//,
-    // 包含 /callback/
-    /\/oauth\//,
-    // 包含 /oauth/
-    /\/auth\//,
-    // 包含 /auth/
-    /\/signin\//,
-    // 包含 /signin/
-    /\/signout\//,
-    // 包含 /signout/
-    /\/session\//,
-    // 包含 /session/
-    /\/providers\//
-    // 包含 /providers/
+    // NextAuth 标准动作（严格匹配）
+    /^\/auth\/signin(\/?)?$/,
+    // /auth/signin 或 /auth/signin/
+    /^\/auth\/signout(\/?)?$/,
+    // /auth/signout 或 /auth/signout/
+    /^\/auth\/session(\/?)?$/,
+    // /auth/session 或 /auth/session/
+    /^\/auth\/providers(\/?)?$/,
+    // /auth/providers 或 /auth/providers/
+    // 通用认证路径（严格匹配）
+    /^\/auth\/callback(\/.*)?$/,
+    // /auth/callback/*
+    // 具体OAuth回调（严格匹配）
+    /^\/api\/auth\/callback\/github(\/?)?$/,
+    /^\/api\/auth\/signin\/github(\/?)?$/,
+    /^\/api\/auth\/signout(\/?)?$/,
+    /^\/api\/auth\/session(\/?)?$/,
+    /^\/api\/auth\/providers(\/?)?$/
   ];
+  const isPageRoute = /\/(image-prompt|image-to-prompt|blog|docs|pricing|tutorials|dashboard|admin)/.test(pathname);
+  const isMarketingPage = /^\/(zh|en|ko|ja)\/(image-prompt|image-to-prompt)/.test(pathname);
+  if (isPageRoute || isMarketingPage) {
+    console.log(`[Auth Route] \u6392\u9664\u9875\u9762\u8DEF\u7531: ${pathname}`);
+    return false;
+  }
   return authPatterns.some((pattern) => pattern.test(pathname));
 }
 const ____auth_ = eventHandler(async (event) => {
@@ -91,20 +82,44 @@ const ____auth_ = eventHandler(async (event) => {
   console.log(`[Auth Route] \u6536\u5230\u8BF7\u6C42: "${pathname}"`);
   console.log(`[Auth Route] \u5B8C\u6574URL: ${getRequestURL(event).href}`);
   if (!isAuthRequest(pathname)) {
-    console.log(`[Auth Route] \u975E\u8BA4\u8BC1\u8BF7\u6C42\uFF0C\u8DF3\u8FC7\u5904\u7406: ${pathname}`);
-    return null;
+    console.log(`[Auth Route] \u975E\u8BA4\u8BC1\u8BF7\u6C42\uFF0C\u76F4\u63A5\u8F6C\u53D1: ${pathname}`);
+    return new Response("Not Found", {
+      status: 404,
+      headers: {
+        "content-type": "text/plain",
+        "X-Auth-Proxy": "non-auth-request"
+      }
+    });
   }
   if (shouldSkipAuth(pathname)) {
     console.log(`[Auth Route] \u8DF3\u8FC7\u9759\u6001\u8D44\u6E90: ${pathname}`);
-    return null;
+    return new Response("Not Found", {
+      status: 404,
+      headers: {
+        "content-type": "text/plain",
+        "X-Auth-Proxy": "static-resource"
+      }
+    });
   }
   if (pathname === "/" || pathname === "") {
     console.log(`[Auth Route] \u8DF3\u8FC7\u6839\u8DEF\u5F84: ${pathname}`);
-    return null;
+    return new Response("Not Found", {
+      status: 404,
+      headers: {
+        "content-type": "text/plain",
+        "X-Auth-Proxy": "root-path"
+      }
+    });
   }
   if (event.context.skipAuth) {
     console.log(`[Auth Route] \u6839\u636E\u4E2D\u95F4\u4EF6\u8DF3\u8FC7: ${pathname}`);
-    return null;
+    return new Response("Not Found", {
+      status: 404,
+      headers: {
+        "content-type": "text/plain",
+        "X-Auth-Proxy": "middleware-skip"
+      }
+    });
   }
   console.log(`[Auth Route] \u5904\u7406\u8BA4\u8BC1\u8BF7\u6C42: ${pathname}`);
   try {
@@ -123,7 +138,10 @@ const ____auth_ = eventHandler(async (event) => {
     console.error(`[Auth Route] \u8BA4\u8BC1\u5904\u7406\u9519\u8BEF: ${pathname}`, error);
     return new Response("Authentication Required", {
       status: 401,
-      headers: { "content-type": "text/plain" }
+      headers: {
+        "content-type": "text/plain",
+        "X-Auth-Proxy": "auth-error"
+      }
     });
   }
 });
