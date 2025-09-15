@@ -41,7 +41,8 @@
       "Bash(tail:*)",
       "Read(//private/tmp/**)",
       "Bash(node:*)",
-      "Bash(./test-image-pages.sh:*)"
+      "Bash(./test-image-pages.sh:*)",
+      "Bash(echo:*)"
     ],
     "deny": [],
     "ask": []

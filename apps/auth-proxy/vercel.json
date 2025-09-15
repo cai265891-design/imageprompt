@@ -12,7 +12,20 @@
     {
       "source": "/api/auth/(.*)",
       "destination": "/routes/[...auth].ts"
+    },
+    {
+      "source": "/auth/(.*)",
+      "destination": "/routes/[...auth].ts"
+    },
+    {
+      "source": "/_next/auth/(.*)",
+      "destination": "/routes/[...auth].ts"
     }
   ],
+  "functions": {
+    "routes/[...auth].ts": {
+      "maxDuration": 30
+    }
+  },
   "version": 2
 }
