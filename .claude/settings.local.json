@@ -36,7 +36,9 @@
       "Bash(npx prettier:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(sed:*)",
+      "Bash(tail:*)"
     ],
     "deny": [],
     "ask": []

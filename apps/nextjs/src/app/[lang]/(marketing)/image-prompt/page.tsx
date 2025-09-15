@@ -1,22 +1,20 @@
 "use client";
 
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable jsx-a11y/no-redundant-roles */
+/* eslint-disable react/no-unescaped-entities */
+
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-import { DevTools } from "@saasfly/ui";
 import type { Locale } from "~/config/i18n-config";
 
 export default function ImagePromptPage() {
   const params = useParams();
   const lang = params?.lang as Locale;
-  // 客户端组件不能使用async，我们使用useEffect来获取字典
-  // 为简单起见，暂时使用硬编码的文本
-
+  
   return (
-    <DevTools
-      filePath="apps/nextjs/src/app/[lang]/(marketing)/image-prompt/page.tsx"
-      lineNumber={15}
-    >
+    <div>
       <style jsx global>{`
         :root {
           --bg: #fff;
@@ -181,7 +179,7 @@ export default function ImagePromptPage() {
       `}</style>
 
       {/* Hero 区 - Replicated from example.html */}
-      <section className="hero" role="region" aria-label="Hero">
+      <section className="hero" aria-label="Hero">
         <div className="hero-inner">
           <h1 className="hero-title">
             Create Better AI Art
@@ -193,7 +191,7 @@ export default function ImagePromptPage() {
           </div>
           <div className="hero-cta">
             <Link href="/zh/image-to-prompt" className="btn btn-primary">
-              Try it now !
+              Try it now!
             </Link>
             <Link href="/zh/tutorials" className="btn btn-outline">
               Tutorials
@@ -202,7 +200,7 @@ export default function ImagePromptPage() {
 
           {/* cards displayed below hero title */}
           <div className="cards-row" aria-hidden="false">
-            <div className="card" role="article" aria-label="Image to Prompt">
+            <div className="card" aria-label="Image to Prompt">
               <div
                 style={{
                   display: "flex",
@@ -217,13 +215,15 @@ export default function ImagePromptPage() {
                       d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
                       stroke="currentColor"
                       strokeWidth="2"
-                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
-                    <polyline
-                      points="7,10 12,15 17,10"
+                    <path
+                      d="M17 8l-5-5-5 5"
                       stroke="currentColor"
                       strokeWidth="2"
-                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <line
                       x1="12"
@@ -242,7 +242,7 @@ export default function ImagePromptPage() {
               </div>
             </div>
 
-            <div className="card" role="article" aria-label="Magic Enhance">
+            <div className="card" aria-label="Magic Enhance">
               <div
                 style={{
                   display: "flex",
@@ -251,195 +251,25 @@ export default function ImagePromptPage() {
                 }}
               >
                 <div className="icon" aria-hidden="true">
-                  {/* Magic Enhance 图标 - 魔法星星 */}
+                  {/* Prompt Enhancer 图标 - 增强 */}
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                     <path
-                      d="M12 2L9 8l-6 1 4 4-1 6 6-3 6 3-1-6 4-4-6-1z"
+                      d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
                       stroke="currentColor"
                       strokeWidth="2"
-                      fill="rgba(127,0,255,0.1)"
-                    />
-                  </svg>
-                </div>
-                <div style={{ flex: 1 }}>
-                  <h4>Magic Enhance</h4>
-                  <p>
-                    Transform simple text into detailed, descriptive image
-                    prompt
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="card" role="article" aria-label="AI Describe Image">
-              <div
-                style={{
-                  display: "flex",
-                  gap: "12px",
-                  alignItems: "flex-start",
-                }}
-              >
-                <div className="icon" aria-hidden="true">
-                  {/* AI Describe Image 图标 - 眼睛/观察 */}
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="3"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                    />
-                    <path
-                      d="M12 1v4m0 14v4m11-7h-4m-14 0H1"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    />
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="8"
-                      stroke="currentColor"
-                      strokeWidth="1"
-                      fill="none"
-                      opacity="0.3"
-                    />
-                  </svg>
-                </div>
-                <div style={{ flex: 1 }}>
-                  <h4>AI Describe Image</h4>
-                  <p>
-                    Let AI help you understand and analyze any image in detail
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 工具区域 - 使用示例.html的样式 */}
-      <section className="w-full bg-white py-20">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <h2
-            className="text-[48px] text-center text-[#020817] mb-6 font-bold"
-            style={{ fontFamily: "DM Sans, sans-serif" }}
-          >
-            AI Powered Image Prompt Tools
-          </h2>
-          <p
-            className="text-center text-[16px] text-[#6b7280] mb-12 max-w-3xl mx-auto"
-            style={{ fontFamily: "DM Sans, sans-serif" }}
-          >
-            A complete suite of AI tools covering every aspect of your image
-            creation journey
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="card" role="article">
-              <div
-                style={{
-                  display: "flex",
-                  gap: "12px",
-                  alignItems: "flex-start",
-                }}
-              >
-                <div className="icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                    />
-                    <polyline
-                      points="7,10 12,15 17,10"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                    />
-                    <line
-                      x1="12"
-                      y1="15"
-                      x2="12"
-                      y2="3"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    />
-                  </svg>
-                </div>
-                <div style={{ flex: 1 }}>
-                  <h4>Image to Prompt</h4>
-                  <p>
-                    Transform your image into detailed image prompt with Image
-                    to Prompt, enhancing your creative process and optimizing
-                    AI-driven design efficiency.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="card" role="article">
-              <div
-                style={{
-                  display: "flex",
-                  gap: "12px",
-                  alignItems: "flex-start",
-                }}
-              >
-                <div className="icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M12 2L9 8l-6 1 4 4-1 6 6-3 6 3-1-6 4-4-6-1z"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="rgba(127,0,255,0.1)"
-                    />
-                  </svg>
-                </div>
-                <div style={{ flex: 1 }}>
-                  <h4>Image Prompt Generator</h4>
-                  <p>
-                    Enhance your AI image generation with our Image Prompt
-                    Generator. Turn your idea into detailed, AI-optimized
-                    prompts, whether you're fluent in English or not.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="card" role="article">
-              <div
-                style={{
-                  display: "flex",
-                  gap: "12px",
-                  alignItems: "flex-start",
-                }}
-              >
-                <div className="icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
                   </svg>
                 </div>
                 <div style={{ flex: 1 }}>
-                  <h4>AI Image Generator</h4>
-                  <p>
-                    Use Image Prompt to effortlessly generate stunning images,
-                    enhancing creativity and streamlining your design process
-                    with AI-powered precision.
-                  </p>
+                  <h4>Magic Enhance</h4>
+                  <p>Enhance your prompts with AI-powered magic</p>
                 </div>
               </div>
             </div>
 
-            <div className="card" role="article">
+            <div className="card" aria-label="Community Gallery">
               <div
                 style={{
                   display: "flex",
@@ -448,128 +278,47 @@ export default function ImagePromptPage() {
                 }}
               >
                 <div className="icon" aria-hidden="true">
+                  {/* Community 图标 - 社区 */}
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="3"
+                    <path
+                      d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
                       stroke="currentColor"
                       strokeWidth="2"
-                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
-                      d="M12 1v4m0 14v4m11-7h-4m-14 0H1"
+                      d="M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"
                       stroke="currentColor"
                       strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="8"
+                    <path
+                      d="M23 21v-2a4 4 0 0 0-3-3.87"
                       stroke="currentColor"
-                      strokeWidth="1"
-                      fill="none"
-                      opacity="0.3"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M16 3.13a4 4 0 0 1 0 7.75"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 </div>
                 <div style={{ flex: 1 }}>
-                  <h4>AI Describe Image</h4>
-                  <p>
-                    Let AI help you understand any image - get detailed
-                    descriptions, recognize objects, or ask your own questions
-                  </p>
+                  <h4>Community Gallery</h4>
+                  <p>Share and explore amazing AI creations</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Inspiration 区 - 简化设计，保持一致性 */}
-      <section className="w-full bg-white py-16">
-        <div className="max-w-[1200px] mx-auto px-6 text-center">
-          <h2
-            className="text-[48px] text-[#020817] mb-6 font-bold"
-            style={{ fontFamily: "DM Sans, sans-serif" }}
-          >
-            Inspiration from Image Prompt
-          </h2>
-          <p
-            className="text-center text-[16px] text-[#6b7280] mb-12 max-w-3xl mx-auto"
-            style={{ fontFamily: "DM Sans, sans-serif" }}
-          >
-            Explore a world of visual inspiration with our AI-generated images
-          </p>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-            {[
-              { title: "3D Animation", icon: "🎲" },
-              { title: "Bauhaus", icon: "🏛️" },
-              { title: "Doodle Art", icon: "✏️" },
-              { title: "Photography", icon: "📸" },
-            ].map((item, index) => (
-              <div key={index} className="card" role="article">
-                <div
-                  className="icon"
-                  aria-hidden="true"
-                  style={{ marginBottom: "12px" }}
-                >
-                  {item.icon}
-                </div>
-                <h4>{item.title}</h4>
-              </div>
-            ))}
-          </div>
-
-          <Link href="/zh/image-to-prompt" className="btn btn-primary">
-            Explore More
-          </Link>
-        </div>
-      </section>
-
-      {/* FAQ 区 - 简化设计 */}
-      <section className="w-full bg-gray-50 py-20">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <h2
-            className="text-[48px] text-center text-[#020817] mb-6 font-bold"
-            style={{ fontFamily: "DM Sans, sans-serif" }}
-          >
-            Frequently Asked Questions
-          </h2>
-
-          <div className="max-w-4xl mx-auto space-y-8">
-            {[
-              {
-                title: "What is an Image Prompt?",
-                content:
-                  "An Image Prompt is a set of instructions or words given to an AI to create a picture. It tells the AI what kind of image you want, like describing a scene or object. By using Image Prompt, you can help the AI make images that match your ideas or needs.",
-              },
-              {
-                title:
-                  "What is the role of image prompt in AI image generation?",
-                content:
-                  "Image prompt plays a crucial role in AI image generation by guiding the AI model to create specific images. They serve as instructions that define the content, style, and details of the desired image.",
-              },
-              {
-                title: "How do I create an effective image prompt?",
-                content:
-                  "To create an effective image prompt, be specific about what you want, include details about style, colors, lighting, and composition. Use descriptive adjectives and avoid ambiguous terms.",
-              },
-              {
-                title: "Can I use Image Prompt for commercial projects?",
-                content:
-                  "Yes, you can use Image Prompt for commercial projects. Our generated prompts are royalty-free and can be used for both personal and commercial purposes.",
-              },
-            ].map((faq, index) => (
-              <div key={index} className="card">
-                <h4 style={{ marginBottom: "12px" }}>{faq.title}</h4>
-                <p>{faq.content}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </DevTools>
+    </div>
   );
 }
