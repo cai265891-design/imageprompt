@@ -9,9 +9,15 @@ const isPublicRoute = createRouteMatcher([
   "/sign-in(.*)",
   "/sign-up(.*)",
   "/api/webhooks/clerk",
+  "/:lang/image-prompt",
+  "/image-prompt",
+  "/:lang/image-to-prompt",
+  "/image-to-prompt",
+  "/:lang/tutorials",
+  "/tutorials",
 ]);
 
-export default clerkMiddleware((auth, request) => {
+export default clerkMiddleware(async (auth, request) => {
   const { pathname } = request.nextUrl;
 
   // 排除静态资源和特殊文件
@@ -53,7 +59,7 @@ export default clerkMiddleware((auth, request) => {
   }
 
   if (!isPublicRoute(request)) {
-    auth().protect();
+    await auth.protect();
   }
 });
 
