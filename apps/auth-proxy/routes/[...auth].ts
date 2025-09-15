@@ -1,6 +1,6 @@
 import { Auth } from "@auth/core";
 import GitHub from "@auth/core/providers/github";
-import { eventHandler, toWebRequest, getRouterParam, send, getRequestPath, getRequestURL } from "h3";
+import { eventHandler, toWebRequest, getRouterParam, getRequestPath, getRequestURL } from "h3";
 
 // 声明 Edge Runtime
 export const runtime = "edge";
@@ -56,19 +56,28 @@ export default eventHandler(async (event) => {
   // 检查是否应该跳过认证
   if (shouldSkipAuth(pathname)) {
     console.log(`[Auth Route] 跳过静态资源: ${pathname}`);
-    return send(event, 404, 'Not Found');
+    return new Response('Not Found', { 
+      status: 404,
+      headers: { 'content-type': 'text/plain' }
+    });
   }
   
   // 特别处理根路径
   if (pathname === '/' || pathname === '') {
     console.log(`[Auth Route] 跳过根路径: ${pathname}`);
-    return send(event, 404, 'Not Found');
+    return new Response('Not Found', { 
+      status: 404,
+      headers: { 'content-type': 'text/plain' }
+    });
   }
   
   // 检查中间件标记
   if (event.context.skipAuth) {
     console.log(`[Auth Route] 根据中间件跳过: ${pathname}`);
-    return send(event, 404, 'Not Found');
+    return new Response('Not Found', { 
+      status: 404,
+      headers: { 'content-type': 'text/plain' }
+    });
   }
   
   try {
@@ -86,6 +95,9 @@ export default eventHandler(async (event) => {
     });
   } catch (error) {
     console.error(`[Auth Route] 认证处理错误: ${pathname}`, error);
-    return send(event, 500, 'Internal Server Error');
+    return new Response('Internal Server Error', { 
+      status: 500,
+      headers: { 'content-type': 'text/plain' }
+    });
   }
 });
