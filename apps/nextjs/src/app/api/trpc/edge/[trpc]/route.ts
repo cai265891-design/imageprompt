@@ -1,21 +1,18 @@
 import type { NextRequest } from "next/server";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-import { getToken } from "next-auth/jwt";
+import { auth } from "@clerk/nextjs/server";
 
 import { createTRPCContext } from "@saasfly/api";
 import { edgeRouter } from "@saasfly/api/edge";
 
 // export const runtime = "edge";
 const createContext = async (req: NextRequest) => {
-  const token = await getToken({
-    req: req as any,
-    secret: process.env.NEXTAUTH_SECRET,
-  });
-
+  const session = await auth();
+  
   return createTRPCContext({
     headers: req.headers,
-    userId: token?.sub,
-    isAdmin: token?.isAdmin as boolean,
+    userId: session?.userId,
+    isAdmin: false, // 将在后续步骤中实现管理员检查
   });
 };
 
