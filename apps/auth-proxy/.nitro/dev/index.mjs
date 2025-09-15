@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { mkdirSync } from 'node:fs';
 import { parentPort, threadId } from 'node:worker_threads';
 import { provider, isWindows } from 'file:///Users/caihongjia/saasfly/node_modules/std-env/dist/index.mjs';
-import { defineEventHandler, handleCacheHeaders, splitCookiesString, isEvent, createEvent, fetchWithEvent, getRequestHeader, eventHandler, setHeaders, sendRedirect, proxyRequest, setResponseStatus, setResponseHeader, send, getRequestURL, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, createError, getRouterParam, getQuery as getQuery$1, readBody, toWebRequest } from 'file:///Users/caihongjia/saasfly/node_modules/h3/dist/index.mjs';
+import { defineEventHandler, handleCacheHeaders, splitCookiesString, isEvent, createEvent, fetchWithEvent, getRequestHeader, eventHandler, setHeaders, sendRedirect, proxyRequest, setResponseStatus, setResponseHeader, send, getRequestURL, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, createError, getRouterParam, getQuery as getQuery$1, readBody, getRequestPath, toWebRequest } from 'file:///Users/caihongjia/saasfly/node_modules/h3/dist/index.mjs';
 import { createFetch as createFetch$1, Headers as Headers$1 } from 'file:///Users/caihongjia/saasfly/node_modules/ofetch/dist/node.mjs';
 import destr from 'file:///Users/caihongjia/saasfly/node_modules/destr/dist/index.mjs';
 import { createCall, createFetch } from 'file:///Users/caihongjia/saasfly/node_modules/unenv/runtime/fetch/index.mjs';
@@ -994,15 +994,21 @@ function shouldSkipAuth(pathname) {
   return skipPatterns.some((pattern) => pattern.test(pathname));
 }
 const ____auth_ = eventHandler(async (event) => {
-  const pathname = getRouterParam(event, "_") || "";
-  console.log(`[Auth Route] \u6536\u5230\u8BF7\u6C42: ${pathname}`);
+  var _a, _b;
+  const pathname = getRouterParam(event, "_") || getRequestPath(event) || (((_b = (_a = event.node) == null ? void 0 : _a.req) == null ? void 0 : _b.url) || "").split("?")[0] || "";
+  console.log(`[Auth Route] \u6536\u5230\u8BF7\u6C42: "${pathname}"`);
+  console.log(`[Auth Route] \u5B8C\u6574URL: ${getRequestURL(event).href}`);
   if (shouldSkipAuth(pathname)) {
     console.log(`[Auth Route] \u8DF3\u8FC7\u9759\u6001\u8D44\u6E90: ${pathname}`);
-    return send(event, "Not Found", 404);
+    return send(event, 404, "Not Found");
+  }
+  if (pathname === "/" || pathname === "") {
+    console.log(`[Auth Route] \u8DF3\u8FC7\u6839\u8DEF\u5F84: ${pathname}`);
+    return send(event, 404, "Not Found");
   }
   if (event.context.skipAuth) {
     console.log(`[Auth Route] \u6839\u636E\u4E2D\u95F4\u4EF6\u8DF3\u8FC7: ${pathname}`);
-    return send(event, "Not Found", 404);
+    return send(event, 404, "Not Found");
   }
   try {
     return await Auth(toWebRequest(event), {
@@ -1018,7 +1024,7 @@ const ____auth_ = eventHandler(async (event) => {
     });
   } catch (error) {
     console.error(`[Auth Route] \u8BA4\u8BC1\u5904\u7406\u9519\u8BEF: ${pathname}`, error);
-    return send(event, "Internal Server Error", 500);
+    return send(event, 500, "Internal Server Error");
   }
 });
 
