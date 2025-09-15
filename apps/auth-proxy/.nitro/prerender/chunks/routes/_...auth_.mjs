@@ -40,24 +40,15 @@ const ____auth_ = eventHandler(async (event) => {
   console.log(`[Auth Route] \u5B8C\u6574URL: ${getRequestURL(event).href}`);
   if (shouldSkipAuth(pathname)) {
     console.log(`[Auth Route] \u8DF3\u8FC7\u9759\u6001\u8D44\u6E90: ${pathname}`);
-    return new Response("Not Found", {
-      status: 404,
-      headers: { "content-type": "text/plain" }
-    });
+    return null;
   }
   if (pathname === "/" || pathname === "") {
     console.log(`[Auth Route] \u8DF3\u8FC7\u6839\u8DEF\u5F84: ${pathname}`);
-    return new Response("Not Found", {
-      status: 404,
-      headers: { "content-type": "text/plain" }
-    });
+    return null;
   }
   if (event.context.skipAuth) {
     console.log(`[Auth Route] \u6839\u636E\u4E2D\u95F4\u4EF6\u8DF3\u8FC7: ${pathname}`);
-    return new Response("Not Found", {
-      status: 404,
-      headers: { "content-type": "text/plain" }
-    });
+    return null;
   }
   try {
     return await Auth(toWebRequest(event), {
@@ -73,8 +64,8 @@ const ____auth_ = eventHandler(async (event) => {
     });
   } catch (error) {
     console.error(`[Auth Route] \u8BA4\u8BC1\u5904\u7406\u9519\u8BEF: ${pathname}`, error);
-    return new Response("Internal Server Error", {
-      status: 500,
+    return new Response("Authentication Required", {
+      status: 401,
       headers: { "content-type": "text/plain" }
     });
   }

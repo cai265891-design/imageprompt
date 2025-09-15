@@ -56,28 +56,21 @@ export default eventHandler(async (event) => {
   // 检查是否应该跳过认证
   if (shouldSkipAuth(pathname)) {
     console.log(`[Auth Route] 跳过静态资源: ${pathname}`);
-    return new Response('Not Found', { 
-      status: 404,
-      headers: { 'content-type': 'text/plain' }
-    });
+    // 对于静态资源，返回null让请求继续传递到文件系统或其他处理程序
+    return null;
   }
   
   // 特别处理根路径
   if (pathname === '/' || pathname === '') {
     console.log(`[Auth Route] 跳过根路径: ${pathname}`);
-    return new Response('Not Found', { 
-      status: 404,
-      headers: { 'content-type': 'text/plain' }
-    });
+    // 根路径跳过认证处理，返回null让其他处理程序处理
+    return null;
   }
   
   // 检查中间件标记
   if (event.context.skipAuth) {
     console.log(`[Auth Route] 根据中间件跳过: ${pathname}`);
-    return new Response('Not Found', { 
-      status: 404,
-      headers: { 'content-type': 'text/plain' }
-    });
+    return null;
   }
   
   try {
@@ -95,8 +88,9 @@ export default eventHandler(async (event) => {
     });
   } catch (error) {
     console.error(`[Auth Route] 认证处理错误: ${pathname}`, error);
-    return new Response('Internal Server Error', { 
-      status: 500,
+    // 认证错误时返回401，让客户端知道需要认证
+    return new Response('Authentication Required', { 
+      status: 401,
       headers: { 'content-type': 'text/plain' }
     });
   }
