@@ -18,12 +18,16 @@
       "outputMode": "new-only"
     },
     "lint": {
-      "dependsOn": ["^topo"],
-      "outputs": ["node_modules/.cache/.eslintcache"]
+      "dependsOn": [],
+      "outputs": ["node_modules/.cache/.eslintcache"],
+      "cache": true,
+      "outputMode": "new-only"
     },
     "typecheck": {
-      "dependsOn": ["^topo"],
-      "outputs": ["node_modules/.cache/tsbuildinfo.json"]
+      "dependsOn": [],
+      "outputs": ["node_modules/.cache/tsbuildinfo.json"],
+      "cache": true,
+      "outputMode": "new-only"
     },
     "clean": {
       "cache": false

@@ -1,5 +1,3 @@
-import { getCurrentUser as getNextAuthUser } from "./nextauth";
-
 export interface User {
   id: string;
   name?: string | null;
@@ -7,5 +5,10 @@ export interface User {
   image?: string | null;
 }
 
-export { authOptions } from "./nextauth";
-export { getCurrentUser } from "./nextauth";
+// Clerk auth functions - 占位符，实际使用Clerk的API
+export const getCurrentUser = async () => {
+  // 使用Clerk API获取当前用户
+  return null;
+};
+
+export const authOptions = {};
