@@ -43,6 +43,48 @@ function shouldSkipAuth(pathname: string): boolean {
   return skipPatterns.some(pattern => pattern.test(pathname));
 }
 
+/**
+ * 检查是否是认证相关的请求
+ */
+function isAuthRequest(pathname: string): boolean {
+  if (!pathname) return false;
+  
+  // NextAuth 标准路由模式
+  const authPatterns = [
+    // 标准 NextAuth 路由
+    /^\/api\/auth(\/.*)?$/,              // /api/auth/*
+    /^\/_next\/auth(\/.*)?$/,            // /_next/auth/*
+    
+    // GitHub OAuth 相关
+    /^\/auth\/github(\/.*)?$/,           // /auth/github/*
+    /^\/auth\/callback(\/.*)?$/,         // /auth/callback/*
+    /^\/oauth\/github(\/.*)?$/,          // /oauth/github/*
+    
+    // 认证动作
+    /^\/auth\/signin(\/.*)?$/,           // /auth/signin/*
+    /^\/auth\/signout(\/.*)?$/,          // /auth/signout/*
+    /^\/auth\/session(\/.*)?$/,          // /auth/session/*
+    /^\/auth\/providers(\/.*)?$/,        // /auth/providers/*
+    
+    // 通用认证路径
+    /^\/auth(\/.*)?$/,                    // /auth/*
+    /^\/oauth(\/.*)?$/,                   // /oauth/*
+    /^\/login(\/.*)?$/,                   // /login/*
+    /^\/logout(\/.*)?$/,                  // /logout/*
+    
+    // 特殊处理：如果路径包含常见的认证关键词
+    /\/callback\//,                       // 包含 /callback/
+    /\/oauth\//,                          // 包含 /oauth/
+    /\/auth\//,                           // 包含 /auth/
+    /\/signin\//,                         // 包含 /signin/
+    /\/signout\//,                        // 包含 /signout/
+    /\/session\//,                        // 包含 /session/
+    /\/providers\//                       // 包含 /providers/
+  ];
+  
+  return authPatterns.some(pattern => pattern.test(pathname));
+}
+
 export default eventHandler(async (event) => {
   // 获取请求路径 - 使用多种方法确保正确获取
   const pathname = getRouterParam(event, '_') || 
@@ -53,10 +95,17 @@ export default eventHandler(async (event) => {
   console.log(`[Auth Route] 收到请求: "${pathname}"`);
   console.log(`[Auth Route] 完整URL: ${getRequestURL(event).href}`);
   
-  // 检查是否应该跳过认证
+  // 首先检查是否是认证相关请求
+  if (!isAuthRequest(pathname)) {
+    console.log(`[Auth Route] 非认证请求，跳过处理: ${pathname}`);
+    // 非认证请求直接返回null，让请求继续传递到Next.js或其他处理程序
+    return null;
+  }
+  
+  // 检查是否应该跳过认证（静态资源）
   if (shouldSkipAuth(pathname)) {
     console.log(`[Auth Route] 跳过静态资源: ${pathname}`);
-    // 对于静态资源，返回null让请求继续传递到文件系统或其他处理程序
+    // 对于静态资源，返回null让请求继续传递
     return null;
   }
   
@@ -72,6 +121,8 @@ export default eventHandler(async (event) => {
     console.log(`[Auth Route] 根据中间件跳过: ${pathname}`);
     return null;
   }
+  
+  console.log(`[Auth Route] 处理认证请求: ${pathname}`);
   
   try {
     // 处理认证请求

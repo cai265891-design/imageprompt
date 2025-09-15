@@ -40,7 +40,8 @@
       "Bash(sed:*)",
       "Bash(tail:*)",
       "Read(//private/tmp/**)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(./test-image-pages.sh:*)"
     ],
     "deny": [],
     "ask": []
