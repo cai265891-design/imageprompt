@@ -6,15 +6,19 @@
       "dependsOn": ["^topo"]
     },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "next-env.d.ts", ".output/**"]
+      "dependsOn": [],
+      "outputs": [".next/**", "!.next/cache/**", "next-env.d.ts", ".output/**"],
+      "cache": true,
+      "outputMode": "new-only"
     },
     "dev": {
       "persistent": true,
       "cache": false
     },
     "format": {
+      "dependsOn": [],
       "outputs": ["node_modules/.cache/.prettiercache"],
+      "cache": true,
       "outputMode": "new-only"
     },
     "lint": {
