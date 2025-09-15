@@ -6,6 +6,9 @@ import { DashboardHeader } from "~/components/header";
 import { DashboardShell } from "~/components/shell";
 import { UserNameForm } from "~/components/user-name-form";
 
+// 配置为动态渲染，避免静态生成时的cookies问题
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Settings",
   description: "Manage account and website settings.",

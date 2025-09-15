@@ -1,12 +1,11 @@
 import "server-only";
 
-import { cookies } from "next/headers";
+import { auth } from "@clerk/nextjs/server";
 import {
   createTRPCProxyClient,
   loggerLink,
   TRPCClientError,
 } from "@trpc/client";
-import { getToken } from "next-auth/jwt";
 
 import { AppRouter } from "@saasfly/api";
 
@@ -35,19 +34,28 @@ export const createTRPCContext = async (opts: {
  * handling a tRPC call from a React Server Component.
  */
 const createContext = cache(async () => {
-  const token = await getToken({
-    req: { headers: { cookie: cookies().toString() } } as any,
-    secret: process.env.NEXTAUTH_SECRET,
-  });
+  try {
+    const session = await auth();
+    const userId = session?.userId;
+    const isAdmin = false; // TODO: 从Clerk获取管理员权限
 
-  return createTRPCContext({
-    headers: new Headers({
-      cookie: cookies().toString(),
-      "x-trpc-source": "rsc",
-    }),
-    userId: token?.sub,
-    isAdmin: token?.isAdmin as boolean,
-  });
+    return createTRPCContext({
+      headers: new Headers({
+        "x-trpc-source": "rsc",
+      }),
+      userId: userId,
+      isAdmin: isAdmin,
+    });
+  } catch (error) {
+    // 如果认证失败，返回未认证上下文
+    return createTRPCContext({
+      headers: new Headers({
+        "x-trpc-source": "rsc",
+      }),
+      userId: undefined,
+      isAdmin: false,
+    });
+  }
 });
 
 export const trpc = createTRPCProxyClient<AppRouter>({

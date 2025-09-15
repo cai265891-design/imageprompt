@@ -20,6 +20,9 @@ import { getDictionary } from "~/lib/get-dictionary";
 import { trpc } from "~/trpc/server";
 import type { ClustersArray } from "~/types/k8s";
 
+// 配置为动态渲染，避免静态生成时的cookies问题
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Dashboard",
 };
