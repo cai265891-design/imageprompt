@@ -11,21 +11,16 @@
   "rewrites": [
     {
       "source": "/api/auth/(.*)",
-      "destination": "/__nitro.func"
+      "destination": "/__nitro"
     },
     {
       "source": "/auth/(.*)",
-      "destination": "/__nitro.func"
+      "destination": "/__nitro"
     },
     {
       "source": "/_next/auth/(.*)",
-      "destination": "/__nitro.func"
+      "destination": "/__nitro"
     }
   ],
-  "functions": {
-    "__nitro.func/index.mjs": {
-      "maxDuration": 30
-    }
-  },
   "version": 2
 }
