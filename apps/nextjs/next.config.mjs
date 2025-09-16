@@ -62,4 +62,59 @@ const config = {
   },
 };
 
-export default withMDX()(config);
+// Enhanced for Vercel deployment
+const enhancedConfig = {
+  ...config,
+  output: "standalone",
+  // Ensure proper trailing slash handling for Vercel
+  trailingSlash: false,
+  // Optimize images for Vercel
+  images: {
+    ...config.images,
+    // Add Vercel's image optimization domains
+    domains: [
+      "images.unsplash.com",
+      "avatars.githubusercontent.com",
+      "www.twillot.com",
+      "cdnv2.ruguoapp.com",
+      "www.setupyourpay.com",
+      "vercel.app",
+      "vercel.com",
+    ],
+    // Enable image optimization
+    unoptimized: false,
+  },
+  // Headers for better caching and security
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+        ],
+      },
+      {
+        source: '/api/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, no-store, must-revalidate',
+          },
+        ],
+      },
+    ];
+  },
+};
+
+export default withMDX()(enhancedConfig);

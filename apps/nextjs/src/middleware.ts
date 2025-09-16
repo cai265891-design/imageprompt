@@ -65,7 +65,7 @@ export default clerkMiddleware(async (auth, request) => {
 
 export const config = {
   matcher: [
-    // 只匹配需要认证的页面路由，排除静态资源和 API
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|ttf|woff|woff2|css|js|xml|txt|json|webmanifest|api|trpc)).*)",
+    // 优化匹配器配置，避免404错误
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|ttf|woff|woff2|css|js|xml|txt|json|webmanifest)).*)",
   ],
 };

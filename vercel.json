@@ -2,5 +2,33 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "bun run build",
   "installCommand": "bun install",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "regions": ["all"],
+  "functions": {
+    "apps/nextjs/src/app/api/trpc/edge/[trpc]/route.ts": {
+      "maxDuration": 30
+    },
+    "apps/nextjs/src/app/api/webhooks/stripe/route.ts": {
+      "maxDuration": 30
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options", 
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    }
+  ]
 }
