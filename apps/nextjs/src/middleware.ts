@@ -23,6 +23,7 @@ export default clerkMiddleware(async (auth, request) => {
   // 排除静态资源和特殊文件
   if (
     pathname === "/favicon.ico" ||
+    pathname === "/favicon.png" ||
     pathname === "/robots.txt" ||
     pathname === "/sitemap.xml" ||
     pathname.startsWith("/images/") ||
@@ -33,7 +34,11 @@ export default clerkMiddleware(async (auth, request) => {
     pathname.endsWith(".xml") ||
     pathname.endsWith(".txt") ||
     pathname.endsWith(".json") ||
-    pathname.endsWith(".webmanifest")
+    pathname.endsWith(".webmanifest") ||
+    pathname.endsWith(".ico") ||
+    pathname.endsWith(".png") ||
+    pathname.endsWith(".jpg") ||
+    pathname.endsWith(".jpeg")
   ) {
     return NextResponse.next();
   }
@@ -50,14 +55,24 @@ export default clerkMiddleware(async (auth, request) => {
     !pathname.startsWith("/_next")
   ) {
     const locale = i18n.defaultLocale;
-    return NextResponse.redirect(
-      new URL(
-        `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
-        request.url,
-      ),
+    // 构建重定向 URL
+    const redirectUrl = new URL(
+      `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
+      request.url,
     );
+
+    // 检查重定向后的路径是否是公开路由
+    const redirectedRequest = new Request(redirectUrl, request);
+    if (isPublicRoute(redirectedRequest)) {
+      // 如果是公开路由，直接重定向，不需要认证
+      return NextResponse.redirect(redirectUrl);
+    }
+
+    // 否则重定向并继续认证流程
+    return NextResponse.redirect(redirectUrl);
   }
 
+  // 检查是否需要认证
   if (!isPublicRoute(request)) {
     await auth.protect();
   }
