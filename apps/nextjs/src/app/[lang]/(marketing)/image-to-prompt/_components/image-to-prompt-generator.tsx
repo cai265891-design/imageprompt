@@ -225,6 +225,8 @@ export function ImageToPromptGenerator() {
           onDragLeave={handleDrag}
           onDragOver={handleDrag}
           onDrop={handleDrop}
+          onClick={() => !uploadedImage && fileInputRef.current?.click()}
+          style={{ cursor: !uploadedImage ? 'pointer' : 'default' }}
         >
           {uploadedImage ? (
             <div className="space-y-4 w-full">
