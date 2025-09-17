@@ -102,17 +102,12 @@ export default eventHandler(async (event) => {
   
   // 首先检查是否是认证相关请求
   if (!isAuthRequest(pathname)) {
-    console.log(`[Auth Route] 非认证请求，直接转发: ${pathname}`);
-    // 非认证请求不应该到达这里，但如果到达了，返回404让Vercel路由到正确的地方
-    return new Response('Not Found', { 
-      status: 404,
-      headers: { 
-        'content-type': 'text/plain',
-        'X-Auth-Proxy': 'non-auth-request'
-      }
-    });
+    console.log(`[Auth Route] 非认证请求，不处理: ${pathname}`);
+    // 非认证请求不应该被 auth-proxy 处理
+    // 返回空响应，让请求继续传递
+    return;
   }
-  
+
   // 检查是否应该跳过认证（静态资源）
   if (shouldSkipAuth(pathname)) {
     console.log(`[Auth Route] 跳过静态资源: ${pathname}`);

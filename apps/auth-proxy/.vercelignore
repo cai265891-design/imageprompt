@@ -1,0 +1,3 @@
+# Ignore everything for auth-proxy
+# This app should not be deployed as it's for NextAuth which is not being used
+*
