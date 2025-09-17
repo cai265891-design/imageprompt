@@ -24,6 +24,16 @@ const isPublicRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, request) => {
+  // 确保 request 和 request.nextUrl 存在
+  if (!request || !request.nextUrl || !request.nextUrl.pathname) {
+    console.error("Request or nextUrl is undefined", {
+      hasRequest: !!request,
+      hasNextUrl: !!request?.nextUrl,
+      hasPathname: !!request?.nextUrl?.pathname
+    });
+    return NextResponse.next();
+  }
+
   const { pathname } = request.nextUrl;
 
   // 排除静态资源和特殊文件
