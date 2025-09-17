@@ -42,7 +42,8 @@
       "Read(//private/tmp/**)",
       "Bash(node:*)",
       "Bash(./test-image-pages.sh:*)",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Bash(./fix-vercel-404.sh:*)"
     ],
     "deny": [],
     "ask": []

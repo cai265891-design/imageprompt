@@ -9,6 +9,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Saasfly is an enterprise-grade Next.js SaaS boilerplate built with a modern tech stack. It uses a monorepo structure managed by Turbo, with Bun as the package manager. The project supports internationalization (en, zh, ko, ja) and includes enterprise features like admin dashboard, Stripe payments, and comprehensive authentication.
 
+## Quick Start
+
+1. **Setup environment**: `cp .env.example .env.local` and configure required variables
+2. **Install dependencies**: `bun install`
+3. **Setup database**: Configure `POSTGRES_URL` then run `bun run db:push`
+4. **Start development**: `bun run dev:web` (or `bun run dev` to include Stripe service)
+5. **Access app**: Open http://localhost:3000
+
 ## Essential Commands
 
 ### Development
@@ -31,6 +39,10 @@ Saasfly is an enterprise-grade Next.js SaaS boilerplate built with a modern tech
 - `bun run gen` - Generate code using Turbo generators
 - `bun run check-deps` - Check dependency version consistency across packages
 
+### Package-specific Commands
+- In `apps/nextjs/`: `bun with-env` - Run commands with environment variables from `.env.local`
+- In `packages/db/`: `bun db:push` - Push Prisma schema to database
+
 ## Architecture
 
 ### Monorepo Structure
@@ -38,12 +50,17 @@ Saasfly is an enterprise-grade Next.js SaaS boilerplate built with a modern tech
 - `apps/auth-proxy/` - Authentication proxy service
 - `packages/api/` - tRPC API definitions and routers
 - `packages/auth/` - Authentication utilities (Clerk + NextAuth support)
-
 - `packages/db/` - Database schema (Prisma) and Kysely query builder
 - `packages/ui/` - Shared UI components (shadcn/ui based)
 - `packages/stripe/` - Stripe integration and webhooks
 - `packages/common/` - Shared utilities and configurations
 - `tooling/` - ESLint, Prettier, TypeScript, and Tailwind configurations
+
+### Build System
+- Uses Turbo for monorepo orchestration
+- Contentlayer for MDX content management (configuration in `contentlayer.config.ts`)
+- Next.js build includes contentlayer build step
+- Vercel deployment configured with root directory at `apps/nextjs`
 
 ### Key Technologies
 - **Framework**: Next.js 14 with App Router
@@ -77,13 +94,20 @@ Supports multiple languages (en, zh, ko, ja) with:
 - Middleware-based routing: `apps/nextjs/src/middleware.ts`
 
 ### Environment Variables
-Create `.env.local` from `.env.example`. Key variables:
-- `POSTGRES_URL` - Database connection (required)
-- `NEXT_PUBLIC_APP_URL` - Application URL (required)
-- `NEXT_PUBLIC_CLERK_*` - Clerk authentication keys (required)
+Create `.env.local` from `.env.example` in the root directory. Key variables:
+
+#### Required Variables
+- `POSTGRES_URL` - Database connection
+- `NEXT_PUBLIC_APP_URL` - Application URL
+- `NEXT_PUBLIC_CLERK_*` - Clerk authentication keys
+
+#### Optional Variables
 - `STRIPE_*` - Stripe payment keys (for payments)
 - `RESEND_*` - Resend email API keys (for emails)
 - `ADMIN_EMAIL` - Admin emails for dashboard access (comma-separated)
+- `NEXT_PUBLIC_POSTHOG_*` - PostHog analytics configuration
+- `COZE_WORKFLOW_ID` / `COZE_BOT_ID` - Coze AI integration for image generation
+- `IS_DEBUG` - Debug mode flag
 
 Note: Database must be prepared before running `bun db:push`
 
@@ -100,6 +124,8 @@ Note: Database must be prepared before running `bun db:push`
 - Use the existing auth context for protected routes
 - Follow the established error handling patterns
 - API endpoints should be type-safe using tRPC procedures
+- tRPC client is configured in `apps/nextjs/src/trpc/`
+- Use `@tanstack/react-query` for data fetching with tRPC
 
 ### Database Operations
 - Use Kysely for type-safe queries (types generated from Prisma schema)
@@ -130,6 +156,11 @@ Note: Database must be prepared before running `bun db:push`
 - Email templates in React Email format
 - Configuration via `RESEND_API_KEY`
 
+### AI Integration
+- Coze API integration for image generation features
+- Supports multiple AI models (normal, flux, midjourney, stableDiffusion)
+- Configuration via `COZE_WORKFLOW_ID` and `COZE_BOT_ID` environment variables
+
 ## Testing & Quality
 
 ### Current Quality Checks
@@ -142,6 +173,12 @@ Note: Database must be prepared before running `bun db:push`
 - Project currently has no Jest/Vitest configuration
 - Quality assurance through type checking and linting
 - Manual testing required for new features
+
+### Development Tools
+- **Source Code Jump**: In development mode, click on page elements to jump directly to the source code in VSCode
+  - Shortcut: Alt + Shift + S
+  - Also available via right-click context menu
+  - Requires sourcemap configuration in `next.config.mjs`
 
 ## Common Issues & Solutions
 
@@ -159,3 +196,21 @@ Note: Database must be prepared before running `bun db:push`
 - Use `bun run clean` to reset dependencies
 - Check dependency consistency with `bun run check-deps`
 - Ensure all environment variables are set for builds
+
+## Deployment Scripts
+
+The project includes several deployment and debugging scripts:
+- `deploy-fix.sh`, `deploy-final-fix.sh` - Automated deployment fixes
+- `fix-auth-issue.sh` - Fix authentication issues
+- `test-vercel-build.sh` - Test Vercel build locally
+- `debug-204-issue.sh` - Debug HTTP 204 response issues
+- `validate-auth-fix.sh` - Validate authentication configuration
+
+## Additional Documentation
+
+For more detailed information, refer to these files:
+- `README.md` - Main project documentation with features and tech stack
+- `DEVELOPMENT_TOOLS.md` - Source code jump functionality guide
+- `DEPLOYMENT_GUIDE.md` - Detailed Vercel deployment instructions
+- `COZE_API_SETUP.md` - AI image generation integration guide
+- `CONTRIBUTING.md` - PR submission guidelines and standards
