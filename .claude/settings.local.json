@@ -43,7 +43,8 @@
       "Bash(node:*)",
       "Bash(./test-image-pages.sh:*)",
       "Bash(echo:*)",
-      "Bash(./fix-vercel-404.sh:*)"
+      "Bash(./fix-vercel-404.sh:*)",
+      "Bash(./fix-vercel-build.sh:*)"
     ],
     "deny": [],
     "ask": []
