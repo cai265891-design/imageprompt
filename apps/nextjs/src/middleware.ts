@@ -4,17 +4,23 @@ import { i18n } from "~/config/i18n-config";
 
 const isPublicRoute = createRouteMatcher([
   "/",
-  "/:lang/sign-in(.*)",
-  "/:lang/sign-up(.*)",
+  "/en",
+  "/zh",
+  "/ko",
+  "/ja",
+  "/(en|zh|ko|ja)/sign-in(.*)",
+  "/(en|zh|ko|ja)/sign-up(.*)",
   "/sign-in(.*)",
   "/sign-up(.*)",
   "/api/webhooks/clerk",
-  "/:lang/image-prompt",
+  "/(en|zh|ko|ja)/image-prompt",
   "/image-prompt",
-  "/:lang/image-to-prompt",
+  "/(en|zh|ko|ja)/image-to-prompt",
   "/image-to-prompt",
-  "/:lang/tutorials",
+  "/(en|zh|ko|ja)/tutorials",
   "/tutorials",
+  "/(en|zh|ko|ja)/pricing",
+  "/pricing",
 ]);
 
 export default clerkMiddleware(async (auth, request) => {
