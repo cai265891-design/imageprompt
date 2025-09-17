@@ -122,7 +122,7 @@ export function NavBar({
               dict={dropdown}
             />
           ) : (
-            <Link href={`/${lang}/login`}>
+            <Link href={`/${lang}/sign-in`}>
               <Button
                 variant="default"
                 size="sm"

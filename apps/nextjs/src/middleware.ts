@@ -1,24 +1,7 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware } from "@clerk/nextjs/server";
 
-// 定义公开路由（无需登录即可访问）
-const isPublicRoute = createRouteMatcher([
-  "/",
-  "/zh(.*)",
-  "/en(.*)",
-  "/ja(.*)",
-  "/ko(.*)",
-  "/sign-in(.*)",
-  "/sign-up(.*)",
-  "/api(.*)",
-  "/trpc(.*)",
-]);
-
-export default clerkMiddleware((auth, req) => {
-  // 如果不是公开路由，则保护该路由
-  if (!isPublicRoute(req)) {
-    auth().protect();
-  }
-});
+// 使用默认的 Clerk 中间件，让所有路由都是公开的
+export default clerkMiddleware();
 
 export const config = {
   matcher: [
