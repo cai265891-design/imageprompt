@@ -2,6 +2,7 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
 export const env = createEnv({
+  skipValidation: !!process.env.SKIP_ENV_VALIDATION || !!process.env.CI,
   server: {
     // Clerk 配置（构建时可选，运行时必须）
     CLERK_SECRET_KEY: z.string().optional(),
@@ -19,7 +20,7 @@ export const env = createEnv({
     IS_DEBUG: z.string().optional(),
   },
   client: {
-    NEXT_PUBLIC_APP_URL: z.string().min(1),
+    NEXT_PUBLIC_APP_URL: z.string().optional().default("https://show.saasfly.io"),
 
     // Clerk 配置（构建时可选，运行时必须）
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().optional(),
