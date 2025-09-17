@@ -1,7 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd apps/nextjs && SKIP_ENV_VALIDATION=true bun install && SKIP_ENV_VALIDATION=true bunx contentlayer2 build && SKIP_ENV_VALIDATION=true bunx next build",
-  "installCommand": "bun install",
+  "ignoreCommand": "echo 'Building Next.js app only'",
+  "buildCommand": "bun install && cd apps/nextjs && SKIP_ENV_VALIDATION=true bunx contentlayer2 build && SKIP_ENV_VALIDATION=true bunx next build",
+  "installCommand": "echo 'Install handled by buildCommand'",
   "outputDirectory": "apps/nextjs/.next",
   "framework": "nextjs",
   "env": {
