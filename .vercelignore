@@ -1,0 +1,21 @@
+# Vercel ignore file
+.git
+.github
+.vscode
+.claude
+node_modules
+.turbo
+.next
+.env.local
+.env.development.local
+*.log
+*.md
+!README.md
+apps/auth-proxy
+scripts
+test-*
+debug-*
+deploy-*
+fix-*
+validate-*
+verify-*
