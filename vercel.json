@@ -1,10 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "bun install && bun run build",
-  "installCommand": "echo 'Using custom install in buildCommand'",
+  "installCommand": "echo 'Skip install - handled by buildCommand'",
   "outputDirectory": "apps/nextjs/.next",
   "framework": null,
-  "regions": ["iad1"],
   "functions": {
     "apps/nextjs/src/app/api/trpc/edge/[trpc]/route.ts": {
       "maxDuration": 30
