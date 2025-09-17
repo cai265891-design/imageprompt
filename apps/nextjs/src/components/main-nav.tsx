@@ -35,12 +35,12 @@ export function MainNav({
     <div className="flex gap-6 md:gap-10">
       <div className="flex items-center">
         <Link
-          href={`/${lang}`}
+          href={`/${lang}/image-prompt`}
           className="hidden items-center space-x-2 md:flex"
         ></Link>
 
         <Link
-          href="/ai-image-generator"
+          href={`/${lang}/image-prompt`}
           className="ml-4 hidden md:flex lg:flex xl:flex"
         >
           <DevTools
