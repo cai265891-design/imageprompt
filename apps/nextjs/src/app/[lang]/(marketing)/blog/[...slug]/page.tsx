@@ -40,7 +40,7 @@ export function generateMetadata({ params }: PostPageProps): Metadata {
     return {};
   }
 
-  const url = env.NEXT_PUBLIC_APP_URL;
+  const url = env.NEXT_PUBLIC_APP_URL || "https://show.saasfly.io";
 
   const ogUrl = new URL(`${url}/api/og`);
   ogUrl.searchParams.set("heading", post.title);
