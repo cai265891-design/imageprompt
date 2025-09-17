@@ -13,7 +13,7 @@ const tools = [
     description: "Create detailed and optimized prompts for MidJourney AI art generation with style parameters and artistic references.",
     icon: Wand2,
     tags: ["MidJourney", "Art", "Creative"],
-    href: "/image-to-prompt",
+    href: "https://imageprompt-nextjs-rmrrxuqaq-cais-projects-6e6b785c.vercel.app/zh/image-to-prompt",
     color: "bg-purple-500",
   },
   {
@@ -22,7 +22,7 @@ const tools = [
     description: "Build precise prompts for DALL-E 3 with composition guidelines, lighting setups, and style modifiers.",
     icon: Image,
     tags: ["DALL-E", "OpenAI", "Realistic"],
-    href: "/image-to-prompt",
+    href: "https://imageprompt-nextjs-rmrrxuqaq-cais-projects-6e6b785c.vercel.app/zh/image-to-prompt",
     color: "bg-blue-500",
   },
   {
@@ -31,7 +31,7 @@ const tools = [
     description: "Generate prompts optimized for Stable Diffusion with negative prompts, model-specific tokens, and LoRA suggestions.",
     icon: Brain,
     tags: ["Stable Diffusion", "Open Source", "Technical"],
-    href: "/image-to-prompt",
+    href: "https://imageprompt-nextjs-rmrrxuqaq-cais-projects-6e6b785c.vercel.app/zh/image-to-prompt",
     color: "bg-green-500",
   },
   {
@@ -40,7 +40,7 @@ const tools = [
     description: "Craft prompts specifically designed for Flux AI with advanced scene composition and photorealistic parameters.",
     icon: Zap,
     tags: ["Flux", "Photorealistic", "Advanced"],
-    href: "/image-to-prompt",
+    href: "https://imageprompt-nextjs-rmrrxuqaq-cais-projects-6e6b785c.vercel.app/zh/image-to-prompt",
     color: "bg-orange-500",
   },
   {
@@ -49,7 +49,7 @@ const tools = [
     description: "Convert and optimize your prompts to work across multiple AI image generation platforms seamlessly.",
     icon: Sparkles,
     tags: ["Universal", "Converter", "Multi-Platform"],
-    href: "/image-to-prompt",
+    href: "https://imageprompt-nextjs-rmrrxuqaq-cais-projects-6e6b785c.vercel.app/zh/image-to-prompt",
     color: "bg-pink-500",
   },
   {
@@ -58,7 +58,7 @@ const tools = [
     description: "Create prompts that effectively transfer artistic styles from famous artists and art movements to your images.",
     icon: Palette,
     tags: ["Style", "Artistic", "Creative"],
-    href: "/image-to-prompt",
+    href: "https://imageprompt-nextjs-rmrrxuqaq-cais-projects-6e6b785c.vercel.app/zh/image-to-prompt",
     color: "bg-indigo-500",
   },
 ];

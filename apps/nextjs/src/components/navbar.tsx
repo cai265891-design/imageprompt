@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import type { User } from "@saasfly/auth";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import { cn } from "@saasfly/ui";
 import { Button } from "@saasfly/ui/button";
@@ -48,7 +48,7 @@ export function NavBar({
 }: NavBarProps) {
   const scrolled = useScroll(50);
   const signInModal = useSigninModal();
-  const segment = useSelectedLayoutSegment();
+  const pathname = usePathname();
 
   return (
     <header
@@ -70,6 +70,13 @@ export function NavBar({
           {items?.length ? (
             <nav className="hidden gap-12 md:flex">
               {items?.map((item, index) => {
+                // 判断是否为当前路径
+                const isActive = pathname === item.href ||
+                  // 对于 home，当路径是 /zh/image-prompt 或 / 时也算选中
+                  (item.title.toLowerCase() === "home" && pathname === "/zh/image-prompt") ||
+                  // 对于 tools，当路径是 /zh/image-to-prompt 时算选中
+                  (item.title.toLowerCase() === "tools" && pathname === "/zh/image-to-prompt");
+
                 return (
                   <Link
                     key={index}
@@ -82,7 +89,7 @@ export function NavBar({
                     }
                     className={cn(
                       "text-base font-medium transition-colors hover:text-primary",
-                      item.href.startsWith(`/${segment}`)
+                      isActive
                         ? "text-primary font-semibold border-b-2 border-primary pb-1"
                         : "text-gray-600 hover:text-primary",
                       item.disabled && "cursor-not-allowed opacity-80",
