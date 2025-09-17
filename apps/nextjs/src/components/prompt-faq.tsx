@@ -7,8 +7,7 @@ import {
   AccordionTrigger,
 } from "@saasfly/ui/accordion";
 import { Card } from "@saasfly/ui/card";
-import { Button } from "@saasfly/ui/button";
-import { MessageCircle, HelpCircle } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 
 const faqs = [
   {
@@ -84,23 +83,6 @@ export function PromptFAQ() {
           </Accordion>
         </Card>
 
-        <div className="mt-12 text-center">
-          <Card className="p-8 bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
-            <MessageCircle className="w-10 h-10 text-primary mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Still have questions?</h3>
-            <p className="text-muted-foreground mb-4">
-              Can't find the answer you're looking for? Our support team is here to help.
-            </p>
-            <div className="flex gap-3 justify-center">
-              <Button>
-                Contact Support
-              </Button>
-              <Button variant="outline">
-                Join Community
-              </Button>
-            </div>
-          </Card>
-        </div>
       </div>
     </section>
   );

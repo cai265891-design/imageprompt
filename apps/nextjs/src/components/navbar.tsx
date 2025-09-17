@@ -81,10 +81,10 @@ export function NavBar({
                           : item.href
                     }
                     className={cn(
-                      "text-sm font-medium transition-colors hover:text-foreground/80",
+                      "text-base font-medium transition-colors hover:text-primary",
                       item.href.startsWith(`/${segment}`)
-                        ? "text-blue-500 font-semibold"
-                        : "text-gray-600 hover:text-gray-900",
+                        ? "text-primary font-semibold border-b-2 border-primary pb-1"
+                        : "text-gray-600 hover:text-primary",
                       item.disabled && "cursor-not-allowed opacity-80",
                     )}
                   >
@@ -109,24 +109,17 @@ export function NavBar({
           {config?.showLocaleChange !== false && <LocaleChange url={"/"} />}
 
           {!user ? (
-            config?.loginStyle === "imageprompt" ? (
-              <Link href={`/${lang}/login`}>
-                <span
-                  className="text-sm font-bold"
-                  style={{ color: "var(--purple-1)" }}
-                >
-                  Login
-                </span>
-              </Link>
-            ) : (
-              <Link href={`/${lang}/login`}>
-                <Button variant="outline" size="sm">
-                  {typeof marketing.login === "string"
-                    ? marketing.login
-                    : "Default Login Text"}
-                </Button>
-              </Link>
-            )
+            <Link href={`/${lang}/login`}>
+              <Button
+                variant="default"
+                size="sm"
+                className="bg-primary hover:bg-primary/90"
+              >
+                {typeof marketing.login === "string"
+                  ? marketing.login
+                  : "Login"}
+              </Button>
+            </Link>
           ) : null}
 
           {user ? (
