@@ -8,6 +8,9 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 
 import type { Locale } from "~/config/i18n-config";
+import { AIPromptTools } from "~/components/ai-prompt-tools";
+import { PromptInspiration } from "~/components/prompt-inspiration";
+import { PromptFAQ } from "~/components/prompt-faq";
 
 export default function ImagePromptPage() {
   const params = useParams();
@@ -319,6 +322,15 @@ export default function ImagePromptPage() {
           </div>
         </div>
       </section>
+
+      {/* AI Powered Image Prompt Tools 部分 */}
+      <AIPromptTools />
+
+      {/* Inspiration from Image Prompt 部分 */}
+      <PromptInspiration />
+
+      {/* Frequently Asked Questions 部分 */}
+      <PromptFAQ />
     </div>
   );
 }
