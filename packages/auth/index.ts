@@ -8,13 +8,8 @@ export interface User {
 // Clerk auth functions - 临时兼容实现
 export const getCurrentUser = async (): Promise<User | null> => {
   // TODO: 实现Clerk集成
-  // 临时返回兼容结构，避免类型错误
-  return {
-    id: "temp-user-id",
-    email: "temp@example.com",
-    name: "Temp User",
-    image: null,
-  };
+  // 返回 null 表示未登录状态
+  return null;
 };
 
 export const authOptions = {};

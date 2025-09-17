@@ -88,10 +88,10 @@ export function NavBar({
                           : item.href
                     }
                     className={cn(
-                      "text-base font-medium transition-colors hover:text-primary",
+                      "text-base font-medium transition-colors relative",
                       isActive
-                        ? "text-primary font-semibold border-b-2 border-primary pb-1"
-                        : "text-gray-600 hover:text-primary",
+                        ? "text-[#7f00ff] font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#7f00ff]"
+                        : "text-gray-600 hover:text-[#7f00ff]",
                       item.disabled && "cursor-not-allowed opacity-80",
                     )}
                   >
@@ -115,20 +115,6 @@ export function NavBar({
 
           {config?.showLocaleChange !== false && <LocaleChange url={"/"} />}
 
-          {!user ? (
-            <Link href={`/${lang}/login`}>
-              <Button
-                variant="default"
-                size="sm"
-                className="bg-primary hover:bg-primary/90"
-              >
-                {typeof marketing.login === "string"
-                  ? marketing.login
-                  : "Login"}
-              </Button>
-            </Link>
-          ) : null}
-
           {user ? (
             <UserAccountNav
               user={user}
@@ -136,16 +122,17 @@ export function NavBar({
               dict={dropdown}
             />
           ) : (
-            <Button
-              className="px-3"
-              variant="default"
-              size="sm"
-              onClick={signInModal.onOpen}
-            >
-              {typeof marketing.signup === "string"
-                ? marketing.signup
-                : "Default Signup Text"}
-            </Button>
+            <Link href={`/${lang}/login`}>
+              <Button
+                variant="default"
+                size="sm"
+                className="bg-[#7f00ff] hover:bg-[#7f00ff]/90 text-white"
+              >
+                {typeof marketing.login === "string"
+                  ? marketing.login
+                  : "Login"}
+              </Button>
+            </Link>
           )}
         </div>
       </div>
