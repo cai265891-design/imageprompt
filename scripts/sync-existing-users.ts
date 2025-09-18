@@ -5,18 +5,24 @@
  * 使用方法: bun run scripts/sync-existing-users.ts
  */
 
-import { clerkClient } from "@clerk/nextjs/server";
+import { createClerkClient } from "@clerk/backend";
 import { db } from "@saasfly/db";
+
+// 从环境变量创建 Clerk 客户端
+const clerkClient = createClerkClient({
+  secretKey: process.env.CLERK_SECRET_KEY || "",
+});
 
 async function syncExistingUsers() {
   console.log("🔄 开始同步 Clerk 用户到数据库...");
 
   try {
     // 获取所有 Clerk 用户
-    const users = await clerkClient.users.getUserList({
+    const response = await clerkClient.users.getUserList({
       limit: 100, // 可以根据需要调整
     });
 
+    const users = response.data || [];
     console.log(`📊 找到 ${users.length} 个用户`);
 
     let syncedCount = 0;
