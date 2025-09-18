@@ -6,7 +6,15 @@ export const metadata: Metadata = {
   description: "Sign in to your ImagePrompt account",
 };
 
-export default function Page() {
+interface PageProps {
+  params: {
+    lang: string;
+  };
+}
+
+export default function Page({ params }: PageProps) {
+  const { lang } = params;
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
       <SignIn
@@ -38,9 +46,9 @@ export default function Page() {
           },
         }}
         routing="path"
-        path="/sign-in"
-        signUpUrl="/sign-up"
-        forceRedirectUrl="/image-prompt"
+        path={`/${lang}/sign-in`}
+        signUpUrl={`/${lang}/sign-up`}
+        forceRedirectUrl={`/${lang}/image-prompt`}
       />
     </div>
   );
