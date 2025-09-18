@@ -1,3 +1,5 @@
+import { currentUser } from "@clerk/nextjs/server";
+
 export interface User {
   id: string;
   name?: string | null;
@@ -5,11 +7,25 @@ export interface User {
   image?: string | null;
 }
 
-// Clerk auth functions - 临时兼容实现
+// Clerk auth functions
 export const getCurrentUser = async (): Promise<User | null> => {
-  // TODO: 实现Clerk集成
-  // 返回 null 表示未登录状态
-  return null;
+  try {
+    const user = await currentUser();
+
+    if (!user) {
+      return null;
+    }
+
+    return {
+      id: user.id,
+      name: user.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : user.username || null,
+      email: user.emailAddresses?.[0]?.emailAddress || null,
+      image: user.imageUrl || null,
+    };
+  } catch (error) {
+    console.error("Error getting current user:", error);
+    return null;
+  }
 };
 
 export const authOptions = {};
