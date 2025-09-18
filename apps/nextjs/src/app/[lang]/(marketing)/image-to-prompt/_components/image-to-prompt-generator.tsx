@@ -279,7 +279,7 @@ export function ImageToPromptGenerator() {
                 src={uploadedImage.preview}
                 alt="Image preview"
                 fill
-                className="object-cover rounded-lg"
+                className="object-contain rounded-lg"
               />
             </div>
           ) : (
@@ -340,9 +340,6 @@ export function ImageToPromptGenerator() {
             "Generate Prompt"
           )}
         </button>
-        <a className="view-history" href="#" role="link">
-          View History
-        </a>
       </div>
 
       {/* Generated prompt area */}
