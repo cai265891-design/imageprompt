@@ -53,11 +53,11 @@ export async function POST(req: Request) {
     const name = first_name ? `${first_name} ${last_name || ""}`.trim() : username || "";
 
     try {
-      // Check if user exists
+      // Check if user exists by ID (more reliable than email)
       const existingUser = await db
         .selectFrom("User")
         .select("id")
-        .where("email", "=", email || "")
+        .where("id", "=", id)
         .executeTakeFirst();
 
       if (existingUser) {
@@ -65,16 +65,17 @@ export async function POST(req: Request) {
         await db
           .updateTable("User")
           .set({
+            email: email || null,
             name: name || null,
             image: image_url || null,
             emailVerified: new Date(),
           })
-          .where("email", "=", email || "")
+          .where("id", "=", id)
           .execute();
 
         console.log(`Updated user: ${email}`);
       } else {
-        // Create new user
+        // Create new user (this handles both user.created and user.updated for missing users)
         await db
           .insertInto("User")
           .values({
@@ -88,20 +89,28 @@ export async function POST(req: Request) {
 
         console.log(`Created new user: ${email}`);
 
-        // Also create a Customer record for the new user
-        await db
-          .insertInto("Customer")
-          .values({
-            authUserId: id,
-            name: name || null,
-            plan: "FREE",
-            createdAt: new Date(),
-            updatedAt: new Date(),
-          })
-          .execute();
+        // Check if Customer record exists
+        const existingCustomer = await db
+          .selectFrom("Customer")
+          .select("id")
+          .where("authUserId", "=", id)
+          .executeTakeFirst();
 
-        console.log(`Created customer record for user: ${email}`);
-      }
+        if (!existingCustomer) {
+          // Create a Customer record for the new user
+          await db
+            .insertInto("Customer")
+            .values({
+              authUserId: id,
+              name: name || null,
+              plan: "FREE",
+              createdAt: new Date(),
+              updatedAt: new Date(),
+            })
+            .execute();
+
+          console.log(`Created customer record for user: ${email}`);
+        }
     } catch (error) {
       console.error("Error syncing user to database:", error);
       return new Response("Database error", { status: 500 });
