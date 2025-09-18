@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 import { Webhook } from "svix";
 import { WebhookEvent } from "@clerk/nextjs/server";
 
-import { db } from "@saasfly/db";
+// 禁用静态优化，避免构建时需要数据库连接
+export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
   // Get the headers
@@ -53,6 +54,9 @@ export async function POST(req: Request) {
     const name = first_name ? `${first_name} ${last_name || ""}`.trim() : username || "";
 
     try {
+      // 动态导入数据库
+      const { db } = await import("@saasfly/db");
+
       // Check if user exists by ID (more reliable than email)
       const existingUser = await db
         .selectFrom("User")
@@ -111,6 +115,7 @@ export async function POST(req: Request) {
 
           console.log(`Created customer record for user: ${email}`);
         }
+      }
     } catch (error) {
       console.error("Error syncing user to database:", error);
       return new Response("Database error", { status: 500 });
@@ -121,6 +126,9 @@ export async function POST(req: Request) {
     const { id } = evt.data;
 
     try {
+      // 动态导入数据库
+      const { db } = await import("@saasfly/db");
+
       // Delete user from database
       await db
         .deleteFrom("User")

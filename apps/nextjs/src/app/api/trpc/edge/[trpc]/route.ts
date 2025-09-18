@@ -5,6 +5,8 @@ import { auth } from "@clerk/nextjs/server";
 import { createTRPCContext } from "@saasfly/api";
 import { edgeRouter } from "@saasfly/api/edge";
 
+// 禁用静态优化，避免构建时需要数据库连接
+export const dynamic = "force-dynamic";
 // export const runtime = "edge";
 const createContext = async (req: NextRequest) => {
   const session = await auth();

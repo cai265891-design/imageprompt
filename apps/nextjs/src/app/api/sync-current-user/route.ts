@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { currentUser } from "@clerk/nextjs/server";
-import { db } from "@saasfly/db";
+
+// 禁用静态优化，避免构建时需要数据库连接
+export const dynamic = "force-dynamic";
 
 /**
  * API 端点：同步当前登录用户到数据库
@@ -8,6 +10,9 @@ import { db } from "@saasfly/db";
  */
 export async function GET() {
   try {
+    // 动态导入数据库，避免构建时错误
+    const { db } = await import("@saasfly/db");
+
     // 获取当前登录的 Clerk 用户
     const user = await currentUser();
 

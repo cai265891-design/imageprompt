@@ -4,6 +4,9 @@ import { handleEvent, stripe, type Stripe } from "@saasfly/stripe";
 
 import { env } from "~/env.mjs";
 
+// 禁用静态优化，避免构建时需要数据库连接
+export const dynamic = "force-dynamic";
+
 const handler = async (req: NextRequest) => {
   const payload = await req.text();
   const signature = req.headers.get("Stripe-Signature")!;
