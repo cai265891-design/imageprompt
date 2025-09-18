@@ -1,4 +1,5 @@
 import { currentUser } from "@clerk/nextjs/server";
+import { syncUserToDatabase } from "./src/sync-user";
 
 export interface User {
   id: string;
@@ -15,6 +16,10 @@ export const getCurrentUser = async (): Promise<User | null> => {
     if (!user) {
       return null;
     }
+
+    // 自动同步用户到数据库
+    // 这确保每个登录的用户都会在数据库中有记录
+    await syncUserToDatabase(user);
 
     return {
       id: user.id,

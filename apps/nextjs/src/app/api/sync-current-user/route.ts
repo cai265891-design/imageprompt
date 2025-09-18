@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentUser } from "@clerk/nextjs/server";
+import { syncUserToDatabase } from "@saasfly/auth/src/sync-user";
 
 // 禁用静态优化，避免构建时需要数据库连接
 export const dynamic = "force-dynamic";
@@ -7,12 +8,11 @@ export const dynamic = "force-dynamic";
 /**
  * API 端点：同步当前登录用户到数据库
  * 访问 /api/sync-current-user 来手动同步
+ *
+ * 注意：通常不需要手动调用此端点，因为 getCurrentUser 会自动同步
  */
 export async function GET() {
   try {
-    // 动态导入数据库，避免构建时错误
-    const { db } = await import("@saasfly/db");
-
     // 获取当前登录的 Clerk 用户
     const user = await currentUser();
 
@@ -23,71 +23,24 @@ export async function GET() {
       );
     }
 
+    // 使用统一的同步函数
+    const result = await syncUserToDatabase(user);
+
     const email = user.emailAddresses?.[0]?.emailAddress;
     const name = user.firstName
       ? `${user.firstName} ${user.lastName || ""}`.trim()
       : user.username || "";
 
-    // 检查用户是否已存在
-    const existingUser = await db
-      .selectFrom("User")
-      .select("id")
-      .where("id", "=", user.id)
-      .executeTakeFirst();
-
-    let message = "";
-
-    if (existingUser) {
-      // 更新现有用户
-      await db
-        .updateTable("User")
-        .set({
-          email: email || null,
-          name: name || null,
-          image: user.imageUrl || null,
-          emailVerified: new Date(),
-        })
-        .where("id", "=", user.id)
-        .execute();
-
-      message = "用户信息已更新";
-    } else {
-      // 创建新用户
-      await db
-        .insertInto("User")
-        .values({
-          id: user.id,
-          email: email || null,
-          name: name || null,
-          image: user.imageUrl || null,
-          emailVerified: new Date(),
-        })
-        .execute();
-
-      message = "用户已同步到数据库";
+    if (!result.success) {
+      return NextResponse.json(
+        { error: "同步失败", details: result.error },
+        { status: 500 }
+      );
     }
 
-    // 检查并创建 Customer 记录
-    const existingCustomer = await db
-      .selectFrom("Customer")
-      .select("id")
-      .where("authUserId", "=", user.id)
-      .executeTakeFirst();
-
-    if (!existingCustomer) {
-      await db
-        .insertInto("Customer")
-        .values({
-          authUserId: user.id,
-          name: name || null,
-          plan: "FREE",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        })
-        .execute();
-
-      message += "，Customer 记录已创建";
-    }
+    const message = result.cached
+      ? "用户数据已在缓存中（最近已同步）"
+      : "用户数据已同步到数据库";
 
     return NextResponse.json({
       success: true,
