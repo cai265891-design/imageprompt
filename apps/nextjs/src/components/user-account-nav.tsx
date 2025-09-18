@@ -49,16 +49,6 @@ export function UserAccountNav({
           </div>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href={`/${lang}/dashboard`}>{dict.dashboard}</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href={`/${lang}/dashboard/billing`}>{dict.billing}</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href={`/${lang}/dashboard/settings`}>{dict.settings}</Link>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
         <DropdownMenuItem
           className="cursor-pointer"
           onSelect={(event) => {
@@ -70,7 +60,7 @@ export function UserAccountNav({
             });
           }}
         >
-          {dict.sign_out}
+          Sign Out
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

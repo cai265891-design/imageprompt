@@ -128,9 +128,7 @@ export function NavBar({
                 size="sm"
                 className="bg-[#7f00ff] hover:bg-[#7f00ff]/90 text-white"
               >
-                {typeof marketing.login === "string"
-                  ? marketing.login
-                  : "Login"}
+                Sign In
               </Button>
             </Link>
           )}
