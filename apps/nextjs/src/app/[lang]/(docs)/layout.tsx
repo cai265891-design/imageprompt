@@ -3,6 +3,9 @@ import { Suspense } from "react";
 import { getCurrentUser } from "@saasfly/auth";
 
 import { NavBar } from "~/components/navbar";
+
+// 禁用静态优化，避免构建时调用 getCurrentUser
+export const dynamic = "force-dynamic";
 import { SiteFooter } from "~/components/site-footer";
 import type { Locale } from "~/config/i18n-config";
 import { getMarketingConfig } from "~/config/ui/marketing";

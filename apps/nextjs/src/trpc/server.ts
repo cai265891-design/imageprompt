@@ -14,7 +14,6 @@ import { observable } from "@trpc/server/observable";
 import { callProcedure } from "@trpc/server";
 import { TRPCErrorResponse } from "@trpc/server/rpc";
 import { cache } from "react";
-import { appRouter } from "../../../../packages/api/src/root";
 
 export const createTRPCContext = async (opts: {
   headers: Headers;
@@ -74,7 +73,9 @@ export const trpc = createTRPCProxyClient<AppRouter>({
       ({ op }) =>
         observable((observer) => {
           createContext()
-            .then((ctx) => {
+            .then(async (ctx) => {
+              // 动态导入 appRouter，避免构建时需要数据库
+              const { appRouter } = await import("../../../../packages/api/src/root");
               return callProcedure({
                 procedures: appRouter._def.procedures,
                 path: op.path,

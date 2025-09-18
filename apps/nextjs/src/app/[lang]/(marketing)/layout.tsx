@@ -2,6 +2,9 @@ import { Suspense } from "react";
 
 import { getCurrentUser } from "@saasfly/auth";
 
+// 禁用静态优化，避免构建时调用 getCurrentUser
+export const dynamic = "force-dynamic";
+
 import { DevToolsProvider } from "~/components/dev-tools-provider";
 import { ModalProvider } from "~/components/modal-provider";
 import { NavBar } from "~/components/navbar";

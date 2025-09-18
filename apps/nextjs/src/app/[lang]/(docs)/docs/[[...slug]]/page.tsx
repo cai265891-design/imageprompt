@@ -2,6 +2,9 @@
 
 import { notFound } from "next/navigation";
 
+// 禁用静态优化，因为父 layout 需要动态渲染
+export const dynamic = "force-dynamic";
+
 import { Mdx } from "~/components/content/mdx-components";
 import { DashboardTableOfContents } from "~/components/content/toc";
 import { DocsPageHeader } from "~/components/docs/page-header";

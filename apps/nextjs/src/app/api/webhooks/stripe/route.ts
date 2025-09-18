@@ -1,6 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-
-import { handleEvent, stripe, type Stripe } from "@saasfly/stripe";
+import type { Stripe } from "stripe";
 
 import { env } from "~/env.mjs";
 
@@ -11,6 +10,9 @@ const handler = async (req: NextRequest) => {
   const payload = await req.text();
   const signature = req.headers.get("Stripe-Signature")!;
   try {
+    // 动态导入 stripe 模块，避免构建时需要数据库
+    const { handleEvent, stripe } = await import("@saasfly/stripe");
+
     const event = stripe.webhooks.constructEvent(
       payload,
       signature,

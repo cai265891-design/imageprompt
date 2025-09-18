@@ -2,29 +2,29 @@ import type { NextRequest } from "next/server";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { auth } from "@clerk/nextjs/server";
 
-import { createTRPCContext } from "@saasfly/api";
-import { edgeRouter } from "@saasfly/api/edge";
-
 // 禁用静态优化，避免构建时需要数据库连接
 export const dynamic = "force-dynamic";
 // export const runtime = "edge";
-const createContext = async (req: NextRequest) => {
-  const session = await auth();
-  
-  return createTRPCContext({
-    headers: req.headers,
-    userId: session?.userId,
-    isAdmin: false, // 将在后续步骤中实现管理员检查
-  });
-};
 
 const handler = async (req: NextRequest) => {
   try {
+    // 动态导入，避免构建时需要数据库
+    const { createTRPCContext } = await import("@saasfly/api");
+    const { edgeRouter } = await import("@saasfly/api/edge");
+
+    const session = await auth();
+
+    const context = createTRPCContext({
+      headers: req.headers,
+      userId: session?.userId,
+      isAdmin: false, // 将在后续步骤中实现管理员检查
+    });
+
     return await fetchRequestHandler({
       endpoint: "/api/trpc/edge",
       router: edgeRouter,
       req: req,
-      createContext: () => createContext(req),
+      createContext: () => context,
       onError: ({ error, path }) => {
         console.error(`❌ Error in tRPC handler (edge) on path ${path}:`, error);
         

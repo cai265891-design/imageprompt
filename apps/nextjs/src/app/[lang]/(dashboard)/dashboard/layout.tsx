@@ -2,6 +2,9 @@ import { notFound } from "next/navigation";
 
 import { getCurrentUser } from "@saasfly/auth";
 
+// 禁用静态优化，避免构建时调用 getCurrentUser
+export const dynamic = "force-dynamic";
+
 import { LocaleChange } from "~/components/locale-change";
 import { MainNav } from "~/components/main-nav";
 import { DashboardNav } from "~/components/nav";

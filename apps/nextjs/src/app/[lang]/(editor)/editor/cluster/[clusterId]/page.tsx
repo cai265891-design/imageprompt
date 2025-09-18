@@ -2,12 +2,17 @@ import { notFound, redirect } from "next/navigation";
 import type { User } from "@saasfly/auth";
 
 import { authOptions, getCurrentUser } from "@saasfly/auth";
-import { db } from "@saasfly/db";
+
+// 禁用静态优化，避免构建时调用数据库
+export const dynamic = "force-dynamic";
 
 import { ClusterConfig } from "~/components/k8s/cluster-config";
 import type { Cluster } from "~/types/k8s";
 
 async function getClusterForUser(clusterId: Cluster["id"], userId: User["id"]) {
+  // 动态导入数据库，避免构建时需要数据库连接
+  const { db } = await import("@saasfly/db");
+
   return await db
     .selectFrom("K8sClusterConfig")
     .selectAll()
