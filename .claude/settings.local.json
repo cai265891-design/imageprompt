@@ -52,13 +52,14 @@
       "Bash(SKIP_ENV_VALIDATION=true bunx next build)",
       "Bash(./test-vercel-deploy.sh:*)",
       "Read(//Users/caihongjia/Library/**)",
-      "Read(//Users/caihongjia/**)"
+      "Read(//Users/caihongjia/**)",
+      "Bash(bun add:*)"
     ],
     "deny": [],
     "ask": []
   },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "playwright"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }
